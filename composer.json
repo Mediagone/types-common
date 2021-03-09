@@ -1,0 +1,34 @@
+{
+    "name": "mediagone/types-common",
+    "type": "library",
+    "description": "A collection of Value Objects you should (always) use instead of primitive types!",
+    "keywords": ["value objects", "ddd", "type"],
+    "license": "MIT",
+    "authors": [
+        {"name": "Bruce Suire"}
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Mediagone\\Types\\Common\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Mediagone\\Types\\Common\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.4|^8.0",
+        "ext-json": "*",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "scripts": {
+        "tests": "phpunit -c phpunit.xml.dist --testsuite Unit_Tests"
+    }
+  }
