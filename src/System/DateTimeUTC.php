@@ -208,6 +208,14 @@ final class DateTimeUTC implements ValueObject
     }
     
     
+    public static function fromTimestamp(int $timestamp) : self
+    {
+        $datetime = (new DateTimeImmutable('', self::getUTC()))->setTimestamp($timestamp);
+        
+        return new self($datetime);
+    }
+    
+    
     public static function fromFormat(string $value, string $format, ?DateTimeZone $timezone = null) : self
     {
         // Ensure all datetime fields are reset if not specified in the format

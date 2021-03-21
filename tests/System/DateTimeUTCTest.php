@@ -83,10 +83,47 @@ final class DateTimeUTCTest extends TestCase
         self::assertSame($date->format(DateTimeInterface::ATOM), $utcDate->format(DateTimeInterface::ATOM));
     }
     
+    public function test_can_be_created_from_string_with_different_timezone() : void
+    {
+        $atomTime = '2020-01-12T11:22:33+00:00';
+        
+        $date = DateTime::createFromFormat(DateTimeInterface::ATOM, $atomTime, new DateTimeZone('Europe/Paris'));
+        $utcDate = DateTimeUTC::fromDateTime($date);
+        
+        $date->setTimezone(new DateTimeZone('UTC'));
+        
+        self::assertSame($date->format('Y-m-d H:i:s.u'), $utcDate->format('Y-m-d H:i:s.u'));
+    }
+    
+    
+    public function test_can_be_created_from_timestamp() : void
+    {
+        $atomTime = '2020-01-12T11:22:33+00:00';
+       
+        $date = DateTime::createFromFormat(DateTimeInterface::ATOM, $atomTime, new DateTimeZone('UTC'));
+        $utcDate = DateTimeUTC::fromTimestamp($date->getTimestamp());
+       
+        self::assertSame($date->format(DateTimeInterface::ATOM), $utcDate->format(DateTimeInterface::ATOM));
+    }
+    
+    
+    public function test_can_be_created_from_timestamp_with_different_timezone() : void
+    {
+        $atomTime = '2020-01-12T11:22:33+00:00';
+        
+        $date = DateTime::createFromFormat(DateTimeInterface::ATOM, $atomTime, new DateTimeZone('Europe/Paris'));
+        $utcDate = DateTimeUTC::fromTimestamp($date->getTimestamp());
+        
+        $date->setTimezone(new DateTimeZone('UTC'));
+        
+        self::assertSame($date->format('Y-m-d H:i:s.u'), $utcDate->format('Y-m-d H:i:s.u'));
+    }
+    
+    
     public function test_cannot_be_created_from_invalid_string() : void
     {
         $this->expectException(InvalidArgumentException::class);
-        $utcDate = DateTimeUTC::fromString('2020-01-12T11:');
+        DateTimeUTC::fromString('2020-01-12T11:');
     }
     
     
