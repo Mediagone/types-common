@@ -33,13 +33,13 @@ final class BinaryTest extends TestCase
     {
         yield [''];
         yield ['abcdef'];
-        yield [file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'Binary.png')];
+        yield [file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . '_file.png')];
     }
     
     
     public function test_can_be_created_from_file() : void
     {
-        $filename = __DIR__ . DIRECTORY_SEPARATOR . 'Binary.png';
+        $filename = __DIR__ . DIRECTORY_SEPARATOR . '_file.png';
         $fileContent = file_get_contents($filename);
         $fileSize = filesize($filename);
         
@@ -51,7 +51,7 @@ final class BinaryTest extends TestCase
     
     public function test_can_be_created_from_binary() : void
     {
-        $binaryA = Binary::fromFile(__DIR__ . DIRECTORY_SEPARATOR . 'Binary.png');
+        $binaryA = Binary::fromFile(__DIR__ . DIRECTORY_SEPARATOR . '_file.png');
         $binaryB = Binary::fromBinary($binaryA);
         
         self::assertSame((string)$binaryA, (string)$binaryB);
