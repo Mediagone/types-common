@@ -35,6 +35,7 @@ All value objects implement a common `ValueObject` interface and `JsonSerializab
 
 ### System
 - `Age`
+- `Base64`
 - `Binary`
 - `Count`
 - `Date`
