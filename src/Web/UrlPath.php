@@ -57,7 +57,7 @@ final class UrlPath implements ValueObject
     }
     
     
-    public static function fromSegments(string... $segments) : self
+    public static function fromSegments(... $segments) : self
     {
         return new self('/'. implode('/', $segments));
     }
