@@ -114,6 +114,30 @@ final class UrlPathTest extends TestCase
     }
     
     
+    public function test_path_can_be_created_from_segments() : void
+    {
+        $path = UrlPath::fromSegments('this', 'is', 'a', 'valid', 'path');
+        
+        self::assertSame('/this/is/a/valid/path', (string)$path);
+    }
+    
+    
+    public function test_path_can_be_created_from_array_of_segments() : void
+    {
+        $path = UrlPath::fromSegments(...['this', 'is', 'a', 'valid', 'path']);
+        
+        self::assertSame('/this/is/a/valid/path', (string)$path);
+    }
+    
+    
+    public function test_path_can_be_created_from_no_segments() : void
+    {
+        $path = UrlPath::fromSegments();
+        
+        self::assertSame('/', (string)$path);
+    }
+    
+    
     
     //========================================================================================================
     // Conversion tests
