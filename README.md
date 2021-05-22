@@ -33,6 +33,9 @@ All value objects implement a common `ValueObject` interface and `JsonSerializab
 - `City`
 - `Country`
 
+### Graphics
+- `Color`
+
 ### System
 - `Age`
 - `Base64`
