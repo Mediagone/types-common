@@ -45,6 +45,7 @@ All value objects implement a common `ValueObject` interface and `JsonSerializab
 - `DateTimeUTC`
 - `Duration`
 - `Hex`
+- `Quantity`
 
 ### Text
 - `Name`
