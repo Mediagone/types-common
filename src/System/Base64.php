@@ -75,7 +75,7 @@ final class Base64 implements ValueObject
             return false;
         }
         
-        return preg_match('#^[a-z0-9+/]*={0,2}$#i', $value) === 1;
+        return preg_match('#^[a-z0-9+/]+={0,2}$#i', $value) === 1;
     }
     
     

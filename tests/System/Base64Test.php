@@ -30,7 +30,6 @@ final class Base64Test extends TestCase
     
     public function stringProvider()
     {
-        yield [''];
         yield ['this is a string'];
         yield ['this is another string !'];
         yield [file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . '_file.png')];
@@ -89,6 +88,7 @@ final class Base64Test extends TestCase
         self::assertFalse(Base64::isValueValid(100));
         self::assertFalse(Base64::isValueValid(true));
         self::assertFalse(Base64::isValueValid(null));
+        self::assertFalse(Base64::isValueValid(''));
         self::assertFalse(Base64::isValueValid('this_is_an_invalid_string'));
         self::assertFalse(Base64::isValueValid('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890==='));
     }
