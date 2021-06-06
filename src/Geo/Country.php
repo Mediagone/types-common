@@ -152,11 +152,8 @@ final class Country implements ValueObject
     
     private static function getCountry(object $country) : self
     {
-        if ($country->c === null) {
-            $country->c = new self($country);
-        }
+        return new self($country);
         
-        return $country->c;
     }
     
     
