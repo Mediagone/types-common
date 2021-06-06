@@ -28,4 +28,6 @@ abstract class Hash implements ValueObject
     abstract public static function fromString(string $plainString, array $options = []) : self;
     
     abstract public function verifyString(string $plainString) : bool;
+    
+    abstract public function equals(Hash $hash) : bool;
 }

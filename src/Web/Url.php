@@ -61,7 +61,7 @@ final class Url implements ValueObject
     // Properties
     //========================================================================================================
     
-    private string $url;
+    private string $value;
     
     
     
@@ -75,7 +75,7 @@ final class Url implements ValueObject
             throw new InvalidArgumentException('The supplied url is invalid, got "' . $url . '".');
         }
         
-        $this->url = $url;
+        $this->value = $url;
     }
     
     
@@ -133,13 +133,24 @@ final class Url implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->url;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->url;
+        return $this->value;
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Url $url) : bool
+    {
+        return $this->value === $url->value;
     }
     
     

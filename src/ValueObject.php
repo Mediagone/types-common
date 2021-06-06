@@ -13,5 +13,4 @@ interface ValueObject extends JsonSerializable
     public static function isValueValid($value) : bool;
     
     public function __toString() : string;
-    
 }

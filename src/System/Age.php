@@ -16,7 +16,7 @@ final class Age implements ValueObject
     // Properties
     //========================================================================================================
     
-    private int $age;
+    private int $value;
     
     
     
@@ -30,7 +30,7 @@ final class Age implements ValueObject
             throw new InvalidArgumentException("The supplied age ($age) is invalid.");
         }
         
-        $this->age = $age;
+        $this->value = $age;
     }
     
     
@@ -67,19 +67,31 @@ final class Age implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->age;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return (string)$this->age;
+        return (string)$this->value;
     }
     
     
     public function toInteger() : int
     {
-        return $this->age;
+        return $this->value;
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Age $age) : bool
+    {
+        return $this->value === $age->value;
+    }
     }
     
     

@@ -176,4 +176,30 @@ final class CityTest extends TestCase
     
     
     
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    public function test_equality_between_cities() : void
+    {
+        $q1 = City::fromString('Valid city');
+        $q2 = City::fromString('Valid city');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_cities() : void
+    {
+        $q1 = City::fromString('Valid city');
+        $q2 = City::fromString('An other valid city');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
+    
 }

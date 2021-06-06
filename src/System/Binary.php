@@ -17,7 +17,7 @@ final class Binary implements ValueObject
     // Properties
     //========================================================================================================
     
-    private string $data;
+    private string $value;
     
     
     
@@ -31,7 +31,7 @@ final class Binary implements ValueObject
             throw new InvalidArgumentException('Invalid binary data');
         }
         
-        $this->data = $data;
+        $this->value = $data;
     }
     
     
@@ -43,7 +43,7 @@ final class Binary implements ValueObject
     
     public static function fromBinary(Binary $binary) : self
     {
-        return new self($binary->data);
+        return new self($binary->value);
     }
     
     
@@ -80,19 +80,30 @@ final class Binary implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->data;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->data;
+        return $this->value;
     }
     
     
     public function getSize() : int
     {
-        return strlen($this->data);
+        return strlen($this->value);
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Binary $binary) : bool
+    {
+        return $this->value === $binary->value;
     }
     
     

@@ -21,7 +21,7 @@ final class Hex implements ValueObject
     // Properties
     //========================================================================================================
     
-    private string $hex;
+    private string $value;
     
     
     
@@ -35,7 +35,7 @@ final class Hex implements ValueObject
             throw new InvalidArgumentException('Invalid hexadecimal value for ' . self::class . " ($hex), it must only contains A-F or 0-9 chars.");
         }
         
-        $this->hex = strtolower($hex);
+        $this->value = strtolower($hex);
     }
     
     
@@ -93,25 +93,36 @@ final class Hex implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->hex;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->hex;
+        return $this->value;
     }
     
     
     public function toBinary() : string
     {
-        return hex2bin($this->hex);
+        return hex2bin($this->value);
     }
     
     
     public function getLength() : int
     {
-        return strlen($this->hex);
+        return strlen($this->value);
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Hex $hex) : bool
+    {
+        return $this->value === $hex->value;
     }
     
     

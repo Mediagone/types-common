@@ -90,4 +90,29 @@ final class DurationTest extends TestCase
     
     
     
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    public function test_equality_between_durations() : void
+    {
+        $q1 = Duration::fromSeconds(20);
+        $q2 = Duration::fromSeconds(20);
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_durations() : void
+    {
+        $q1 = Duration::fromSeconds(20);
+        $q2 = Duration::fromSeconds(13);
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
 }

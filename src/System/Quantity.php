@@ -13,7 +13,7 @@ final class Quantity implements ValueObject
     // Properties
     //========================================================================================================
     
-    private int $quantity;
+    private int $value;
     
     
     
@@ -27,7 +27,7 @@ final class Quantity implements ValueObject
             throw new InvalidArgumentException("The supplied quantity ($quantity) is invalid.");
         }
         
-        $this->quantity = $quantity;
+        $this->value = $quantity;
     }
     
     
@@ -64,19 +64,31 @@ final class Quantity implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->quantity;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return (string)$this->quantity;
+        return (string)$this->value;
     }
     
     
     public function toInteger() : int
     {
-        return $this->quantity;
+        return $this->value;
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Quantity $quantity) : bool
+    {
+        return $this->value === $quantity->value;
+    }
     }
     
     

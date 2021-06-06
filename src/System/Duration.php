@@ -18,7 +18,7 @@ final class Duration implements ValueObject
     // Properties
     //========================================================================================================
     
-    private int $duration;
+    private int $value;
     
     
     
@@ -32,7 +32,7 @@ final class Duration implements ValueObject
             throw new InvalidArgumentException("The supplied duration ($duration) is invalid.");
         }
         
-        $this->duration = $duration;
+        $this->value = $duration;
     }
     
     
@@ -96,28 +96,39 @@ final class Duration implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->duration;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return (string)$this->duration;
+        return (string)$this->value;
     }
     
     
     public function toSeconds() : int
     {
-        return $this->duration;
+        return $this->value;
     }
     
     
     public function format(string $separator = ':') : string
     {
-        $hours = floor($this->duration / 60);
-        $minutes = $this->duration % 60;
+        $hours = floor($this->value / 60);
+        $minutes = $this->value % 60;
         
         return $hours.$separator.$minutes;
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Duration $age) : bool
+    {
+        return $this->value === $age->value;
     }
     
     

@@ -37,7 +37,7 @@ final class UrlHost implements ValueObject
     // Properties
     //========================================================================================================
     
-    private string $url;
+    private string $value;
     
     
     
@@ -51,7 +51,7 @@ final class UrlHost implements ValueObject
             throw new InvalidArgumentException('The supplied host url is invalid, got "' . $url . '".');
         }
         
-        $this->url = $url;
+        $this->value = $url;
     }
     
     
@@ -100,13 +100,24 @@ final class UrlHost implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->url;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->url;
+        return $this->value;
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(UrlHost $urlHost) : bool
+    {
+        return $this->value === $urlHost->value;
     }
     
     

@@ -21,7 +21,7 @@ final class HashBcrypt extends Hash
     
     public const DEFAULT_COST = 14;
     
-    private string $hash;
+    private string $value;
     
     
     
@@ -35,7 +35,7 @@ final class HashBcrypt extends Hash
             throw new InvalidArgumentException('The supplied value is not a valid Bcrypt hash.');
         }
         
-        $this->hash = $hash;
+        $this->value = $hash;
     }
     
     
@@ -92,26 +92,41 @@ final class HashBcrypt extends Hash
     
     public function jsonSerialize()
     {
-        return $this->hash;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->hash;
+        return $this->value;
     }
     
     
     public function verifyString(string $plainString) : bool
     {
-        return password_verify($plainString, $this->hash);
+        return password_verify($plainString, $this->value);
     }
     
     
     public function getCost() : int
     {
-        $infos = password_get_info($this->hash);
+        $infos = password_get_info($this->value);
         return (int)$infos['options']['cost'];
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Hash $hash) : bool
+    {
+        if ($hash instanceof HashBcrypt) {
+            return $this->value === $hash->value;
+        }
+        
+        return false;
     }
     
     

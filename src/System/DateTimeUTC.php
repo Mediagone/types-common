@@ -35,7 +35,7 @@ final class DateTimeUTC implements ValueObject
     }
     
     
-    private DateTimeImmutable $datetime;
+    private DateTimeImmutable $value;
     
     
     
@@ -50,7 +50,7 @@ final class DateTimeUTC implements ValueObject
             $datetime = $datetime->setTimezone(self::getUTC());
         }
         
-        $this->datetime = $datetime;
+        $this->value = $datetime;
     }
     
     
@@ -305,49 +305,49 @@ final class DateTimeUTC implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->datetime->format(DateTimeInterface::ATOM);
+        return $this->value->format(DateTimeInterface::ATOM);
     }
     
     
     public function __toString() : string
     {
-        return $this->datetime->format(DateTimeInterface::ATOM);
+        return $this->value->format(DateTimeInterface::ATOM);
     }
     
     
     public function toTimestamp() : int
     {
-        return $this->datetime->getTimestamp();
+        return $this->value->getTimestamp();
     }
     
     
     public function format(string $format) : string
     {
-        return $this->datetime->format($format);
+        return $this->value->format($format);
     }
     
     
     public function modify(string $modify) : self
     {
-        return new self($this->datetime->modify($modify));
+        return new self($this->value->modify($modify));
     }
     
     
     public function midnight() : self
     {
-        return new self($this->datetime->setTime(23,59,59,999999));
+        return new self($this->value->setTime(23,59,59,999999));
     }
     
     
     public function isPast() : bool
     {
-        return $this->datetime->getTimestamp() < time();
+        return $this->value->getTimestamp() < time();
     }
     
     
     public function isFuture() : bool
     {
-        return $this->datetime->getTimestamp() > time();
+        return $this->value->getTimestamp() > time();
     }
     
     
@@ -363,61 +363,72 @@ final class DateTimeUTC implements ValueObject
     
     public function getYear() : int
     {
-        return (int)$this->datetime->format('Y');
+        return (int)$this->value->format('Y');
     }
     
     
     public function getMonth() : int
     {
-        return (int)$this->datetime->format('m');
+        return (int)$this->value->format('m');
     }
     
     
     public function getDay() : int
     {
-        return (int)$this->datetime->format('d');
+        return (int)$this->value->format('d');
     }
     
     
     public function getHours() : int
     {
-        return (int)$this->datetime->format('H');
+        return (int)$this->value->format('H');
     }
     
     
     public function getMinutes() : int
     {
-        return (int)$this->datetime->format('i');
+        return (int)$this->value->format('i');
     }
     
     
     public function getSeconds() : int
     {
-        return (int)$this->datetime->format('s');
+        return (int)$this->value->format('s');
     }
     
     
     public function getDayOfWeek() : int
     {
-        return (int)$this->datetime->format('N');
+        return (int)$this->value->format('N');
     }
     
     
     public function getDayOfYear() : int
     {
-        return ((int)$this->datetime->format('z') + 1);
+        return ((int)$this->value->format('z') + 1);
     }
     
     
     public function getWeek() : int
     {
-        return (int)$this->datetime->format('W');
+        return (int)$this->value->format('W');
     }
     
     
     public function getDate() : Date
     {
         return Date::fromValues($this->getYear(), $this->getMonth(), $this->getDay());
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(DateTimeUTC $date) : bool
+    {
+        return (string)$this === (string)$date;
     }
     
     

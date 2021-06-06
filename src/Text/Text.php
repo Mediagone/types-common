@@ -25,7 +25,7 @@ final class Text implements ValueObject
     //
     //========================================================================================================
     
-    private string $text;
+    private string $value;
     
     
     
@@ -39,7 +39,7 @@ final class Text implements ValueObject
             throw new InvalidArgumentException('The supplied Text is invalid.');
         }
         
-        $this->text = $text;
+        $this->value = $text;
     }
     
     
@@ -70,13 +70,24 @@ final class Text implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->text;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->text;
+        return $this->value;
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Text $text) : bool
+    {
+        return $this->value === $text->value;
     }
     
     

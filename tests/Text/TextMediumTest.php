@@ -101,4 +101,30 @@ final class TextMediumTest extends TestCase
     
     
     
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    public function test_equality_between_texts() : void
+    {
+        $q1 = TextMedium::fromString('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        $q2 = TextMedium::fromString('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_texts() : void
+    {
+        $q1 = TextMedium::fromString('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        $q2 = TextMedium::fromString('abcdefghijklmnopqrstuvwxyz');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
+    
 }

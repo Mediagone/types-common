@@ -148,4 +148,30 @@ final class SlugTest extends TestCase
     }
     
     
+    
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    public function test_equality_between_slugs() : void
+    {
+        $q1 = Slug::fromString('this-is-a-slug');
+        $q2 = Slug::fromString('this-is-a-slug');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_slugs() : void
+    {
+        $q1 = Slug::fromString('this-is-a-slug');
+        $q2 = Slug::fromString('this-is-another-slug');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
 }

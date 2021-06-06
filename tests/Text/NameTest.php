@@ -148,4 +148,30 @@ final class NameTest extends TestCase
     
     
     
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    public function test_equality_between_names() : void
+    {
+        $q1 = Name::fromString('John');
+        $q2 = Name::fromString('John');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_names() : void
+    {
+        $q1 = Name::fromString('John');
+        $q2 = Name::fromString('Jack');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
+    
 }

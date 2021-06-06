@@ -24,7 +24,7 @@ final class HashArgon2id extends Hash
     public const DEFAULT_TIME_COST = 6;
     public const DEFAULT_THREADS = 2;
     
-    private string $hash;
+    private string $value;
     
     
     
@@ -38,7 +38,7 @@ final class HashArgon2id extends Hash
             throw new InvalidArgumentException('The supplied value is not a valid Argon2id hash.');
         }
         
-        $this->hash = $hash;
+        $this->value = $hash;
     }
     
     
@@ -113,40 +113,55 @@ final class HashArgon2id extends Hash
     
     public function jsonSerialize()
     {
-        return $this->hash;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->hash;
+        return $this->value;
     }
     
     
     public function verifyString(string $plainString) : bool
     {
-        return password_verify($plainString, $this->hash);
+        return password_verify($plainString, $this->value);
     }
     
     
     public function getMemoryCost() : int
     {
-        $infos = password_get_info($this->hash);
+        $infos = password_get_info($this->value);
         return (int)$infos['options']['memory_cost'];
     }
     
     
     public function getTimeCost() : int
     {
-        $infos = password_get_info($this->hash);
+        $infos = password_get_info($this->value);
         return (int)$infos['options']['time_cost'];
     }
     
     
     public function getThreadsCount() : int
     {
-        $infos = password_get_info($this->hash);
+        $infos = password_get_info($this->value);
         return (int)$infos['options']['threads'];
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Hash $hash) : bool
+    {
+        if ($hash instanceof HashArgon2id) {
+            return $this->value === $hash->value;
+        }
+        
+        return false;
     }
     
     

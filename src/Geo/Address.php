@@ -34,7 +34,7 @@ final class Address implements ValueObject
     //
     //========================================================================================================
     
-    private string $address;
+    private string $value;
     
     
     
@@ -48,7 +48,7 @@ final class Address implements ValueObject
             throw new InvalidArgumentException("The supplied address ($address) is invalid.");
         }
         
-        $this->address = $address;
+        $this->value = $address;
     }
     
     
@@ -88,13 +88,24 @@ final class Address implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->address;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->address;
+        return $this->value;
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Address $address) : bool
+    {
+        return $this->value === $address->value;
     }
     
     

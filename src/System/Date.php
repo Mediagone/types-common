@@ -51,7 +51,7 @@ final class Date implements ValueObject
     }
     
     
-    private DateTimeImmutable $datetime;
+    private DateTimeImmutable $value;
     
     
     
@@ -66,7 +66,7 @@ final class Date implements ValueObject
             $datetime = $datetime->setTimezone(self::getUTC());
         }
         
-        $this->datetime = $datetime;
+        $this->value = $datetime;
     }
     
     
@@ -260,85 +260,96 @@ final class Date implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->datetime->format('Y-m-d');
+        return $this->value->format('Y-m-d');
     }
     
     
     public function __toString() : string
     {
-        return $this->datetime->format('Y-m-d');
+        return $this->value->format('Y-m-d');
     }
     
     
     public function toTimestamp() : int
     {
-        return $this->datetime->getTimestamp();
+        return $this->value->getTimestamp();
     }
     
     
     public function format(string $format) : string
     {
-        return $this->datetime->format($format);
+        return $this->value->format($format);
     }
     
     
     public function modify(string $modify) : self
     {
-        return new self($this->datetime->modify($modify)->setTime(0, 0, 0, 0));
+        return new self($this->value->modify($modify)->setTime(0, 0, 0, 0));
     }
     
     
     public function isPast() : bool
     {
-        return $this->datetime->getTimestamp() < self::today()->toTimestamp();
+        return $this->value->getTimestamp() < self::today()->toTimestamp();
     }
     
     
     public function isFuture() : bool
     {
-        return $this->datetime->getTimestamp() > self::today()->toTimestamp();
+        return $this->value->getTimestamp() > self::today()->toTimestamp();
     }
     
     
     public function isToday() : bool
     {
-        return $this->datetime->getTimestamp() === self::today()->toTimestamp();
+        return $this->value->getTimestamp() === self::today()->toTimestamp();
     }
     
     
     public function getYear() : int
     {
-        return (int)$this->datetime->format('Y');
+        return (int)$this->value->format('Y');
     }
     
     
     public function getMonth() : int
     {
-        return (int)$this->datetime->format('m');
+        return (int)$this->value->format('m');
     }
     
     
     public function getDay() : int
     {
-        return (int)$this->datetime->format('d');
+        return (int)$this->value->format('d');
     }
     
     
     public function getDayOfWeek() : int
     {
-        return (int)$this->datetime->format('N');
+        return (int)$this->value->format('N');
     }
     
     
     public function getDayOfYear() : int
     {
-        return ((int)$this->datetime->format('z') + 1);
+        return ((int)$this->value->format('z') + 1);
     }
     
     
     public function getWeek() : int
     {
-        return (int)$this->datetime->format('W');
+        return (int)$this->value->format('W');
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Date $date) : bool
+    {
+        return (string)$this === (string)$date;
     }
     
     

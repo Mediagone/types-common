@@ -270,4 +270,30 @@ final class EmailAddressTest extends TestCase
     
     
     
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    public function test_equality_between_emails() : void
+    {
+        $q1 = EmailAddress::fromString('foo@domain.com');
+        $q2 = EmailAddress::fromString('foo@domain.com');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_emails() : void
+    {
+        $q1 = EmailAddress::fromString('foo@domain.com');
+        $q2 = EmailAddress::fromString('foobar@domain.com');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
+    
 }

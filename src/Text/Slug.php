@@ -31,7 +31,7 @@ final class Slug implements ValueObject
     // Properties
     //========================================================================================================
     
-    private string $slug;
+    private string $value;
     
     
     
@@ -45,7 +45,7 @@ final class Slug implements ValueObject
             throw new InvalidArgumentException("The supplied slug ($slug) is invalid.");
         }
         
-        $this->slug = $slug;
+        $this->value = $slug;
     }
     
     
@@ -95,13 +95,24 @@ final class Slug implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->slug;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->slug;
+        return $this->value;
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Slug $slug) : bool
+    {
+        return $this->value === $slug->value;
     }
     
     

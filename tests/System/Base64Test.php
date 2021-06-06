@@ -95,4 +95,33 @@ final class Base64Test extends TestCase
     
     
     
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    /**
+     * @dataProvider stringProvider
+     */
+    public function test_equality_between_base64($value) : void
+    {
+        $q1 = Base64::fromString($value);
+        $q2 = Base64::fromString($value);
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_base64() : void
+    {
+        $q1 = Base64::fromString('abcdef');
+        $q2 = Base64::fromString('zkcd');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
+    
 }

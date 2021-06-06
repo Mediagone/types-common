@@ -221,4 +221,30 @@ final class UrlTest extends TestCase
     
     
     
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    public function test_equality_between_urls() : void
+    {
+        $q1 = Url::fromString('http://domain.com/page');
+        $q2 = Url::fromString('http://domain.com/page');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_urls() : void
+    {
+        $q1 = Url::fromString('http://domain.com/page');
+        $q2 = Url::fromString('http://domain.com/another-page');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
+    
 }

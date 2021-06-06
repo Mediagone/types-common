@@ -36,7 +36,7 @@ final class Title implements ValueObject
     //
     //========================================================================================================
     
-    private string $title;
+    private string $value;
     
     
     
@@ -54,7 +54,7 @@ final class Title implements ValueObject
             throw new InvalidArgumentException("The supplied title is invalid ($title).");
         }
         
-        $this->title = $title;
+        $this->value = $title;
     }
     
     
@@ -92,13 +92,24 @@ final class Title implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->title;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->title;
+        return $this->value;
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Title $title) : bool
+    {
+        return $this->value === $title->value;
     }
     
     

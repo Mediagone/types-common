@@ -6,6 +6,7 @@ use Generator;
 use InvalidArgumentException;
 use JsonSerializable;
 use Mediagone\Types\Common\Crypto\HashArgon2id;
+use Mediagone\Types\Common\Crypto\HashBcrypt;
 use PHPUnit\Framework\TestCase;
 
 
@@ -182,6 +183,32 @@ final class HashArgon2idTest extends TestCase
     {
         $hash = HashArgon2id::fromString('p4ssword');
         self::assertFalse($hash->verifyString('not-the-same'));
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    public function test_equality_between_hashes() : void
+    {
+        $q1 = HashArgon2id::fromHash('$argon2id$v=19$m=65536,t=4,p=1$MGU4dnY2Lkw2bHpmTzV5Wg$u7LBqzixVlVzvWTcbxHGpGTj6FyStwInN67cTGZBNXI');
+        $q2 = HashArgon2id::fromHash('$argon2id$v=19$m=65536,t=4,p=1$MGU4dnY2Lkw2bHpmTzV5Wg$u7LBqzixVlVzvWTcbxHGpGTj6FyStwInN67cTGZBNXI');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_hashes() : void
+    {
+        $q1 = HashArgon2id::fromHash('$argon2id$v=19$m=65536,t=4,p=1$MGU4dnY2Lkw2bHpmTzV5Wg$u7LBqzixVlVzvWTcbxHGpGTj6FyStwInN67cTGZBNXI');
+        $q2 = HashArgon2id::fromHash('$argon2id$v=19$m=65536,t=4,p=1$MGU4dnY2Lkw2bHpmTzV5Wg$u7LBqzixVlVzvWTcbxHGpGTj6FyStwInN67cTGZBNX+');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
     }
     
     

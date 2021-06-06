@@ -16,7 +16,7 @@ final class Count implements ValueObject
     // Properties
     //========================================================================================================
     
-    private int $count;
+    private int $value;
     
     
     
@@ -30,7 +30,7 @@ final class Count implements ValueObject
             throw new InvalidArgumentException("The supplied count ($count) is invalid.");
         }
         
-        $this->count = $count;
+        $this->value = $count;
     }
     
     
@@ -67,19 +67,31 @@ final class Count implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->count;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return (string)$this->count;
+        return (string)$this->value;
     }
     
     
     public function toInteger() : int
     {
-        return $this->count;
+        return $this->value;
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Count $count) : bool
+    {
+        return $this->value === $count->value;
+    }
     }
     
     

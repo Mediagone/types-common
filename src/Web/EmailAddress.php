@@ -46,7 +46,7 @@ final class EmailAddress implements ValueObject
     // Properties
     //========================================================================================================
     
-    private string $address;
+    private string $value;
     
     
     
@@ -60,7 +60,7 @@ final class EmailAddress implements ValueObject
             throw new InvalidArgumentException("The supplied email address is invalid ($address).");
         }
         
-        $this->address = $address;
+        $this->value = $address;
     }
     
     
@@ -100,13 +100,24 @@ final class EmailAddress implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->address;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->address;
+        return $this->value;
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(EmailAddress $email) : bool
+    {
+        return $this->value === $email->value;
     }
     
     

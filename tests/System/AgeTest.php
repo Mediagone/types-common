@@ -90,4 +90,29 @@ final class AgeTest extends TestCase
     
     
     
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    public function test_equality_between_ages() : void
+    {
+        $q1 = Age::fromInt(20);
+        $q2 = Age::fromInt(20);
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_ages() : void
+    {
+        $q1 = Age::fromInt(20);
+        $q2 = Age::fromInt(13);
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
 }

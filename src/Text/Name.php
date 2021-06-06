@@ -36,7 +36,7 @@ final class Name implements ValueObject
     //
     //========================================================================================================
     
-    private string $name;
+    private string $value;
     
     
     
@@ -50,7 +50,7 @@ final class Name implements ValueObject
             throw new InvalidArgumentException("The supplied name ($name) is invalid.");
         }
         
-        $this->name = $name;
+        $this->value = $name;
     }
     
     
@@ -90,13 +90,24 @@ final class Name implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->name;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->name;
+        return $this->value;
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Name $name) : bool
+    {
+        return $this->value === $name->value;
     }
     
     

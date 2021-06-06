@@ -158,4 +158,15 @@ final class Color implements ValueObject
     
     
     
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Color $color) : bool
+    {
+        return (string)$this === (string)$color;
+    }
+    
+    
+    
 }

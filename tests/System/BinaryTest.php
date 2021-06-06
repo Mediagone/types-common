@@ -2,6 +2,7 @@
 
 namespace Tests\Mediagone\Types\Common\System;
 
+use Mediagone\Types\Common\System\Base64;
 use Mediagone\Types\Common\System\Binary;
 use PHPUnit\Framework\TestCase;
 use function file_get_contents;
@@ -88,6 +89,35 @@ final class BinaryTest extends TestCase
         self::assertFalse(Binary::isValueValid(100));
         self::assertFalse(Binary::isValueValid(true));
         self::assertFalse(Binary::isValueValid(null));
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    /**
+     * @dataProvider binaryStringProvider
+     */
+    public function test_equality_between_binaries($binaryString) : void
+    {
+        $q1 = Binary::fromString($binaryString);
+        $q2 = Binary::fromString($binaryString);
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_binaries() : void
+    {
+        $q1 = Binary::fromString('abcdef');
+        $q2 = Binary::fromString('zkcd');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
     }
     
     

@@ -37,7 +37,7 @@ final class City implements ValueObject
     //
     //========================================================================================================
     
-    private string $city;
+    private string $value;
     
     
     
@@ -51,7 +51,7 @@ final class City implements ValueObject
             throw new InvalidArgumentException("The supplied city name ($city) is invalid.");
         }
         
-        $this->city = $city;
+        $this->value = $city;
     }
     
     
@@ -91,13 +91,24 @@ final class City implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->city;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->city;
+        return $this->value;
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(City $city) : bool
+    {
+        return $this->value === $city->value;
     }
     
     

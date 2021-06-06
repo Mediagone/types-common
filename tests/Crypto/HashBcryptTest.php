@@ -257,4 +257,30 @@ final class HashBcryptTest extends TestCase
     
     
     
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    public function test_equality_between_hashes() : void
+    {
+        $q1 = HashBcrypt::fromHash('$2y$12$00000000000000000000000000000000000000000000000000000');
+        $q2 = HashBcrypt::fromHash('$2y$12$00000000000000000000000000000000000000000000000000000');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_hashes() : void
+    {
+        $q1 = HashBcrypt::fromHash('$2y$12$00000000000000000000000000000000000000000000000000000');
+        $q2 = HashBcrypt::fromHash('$2y$12$11100000000000000000000000000000000000000000000000000');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
+    
 }

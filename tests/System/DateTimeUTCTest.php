@@ -562,4 +562,53 @@ final class DateTimeUTCTest extends TestCase
     
     
     
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    public function test_equality_between_dates() : void
+    {
+        $q1 = DateTimeUTC::fromValues(2020, 1, 12, 11, 22, 33);
+        $q2 = DateTimeUTC::fromValues(2020, 1, 12, 11, 22, 33);
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    
+    public function test_equality_between_dates_with_different_timezones() : void
+    {
+        $q1 = DateTimeUTC::fromValues(2020, 1, 12, 11, 22, 33);
+        $q2 = DateTimeUTC::fromValues(2020, 1, 12, 12, 22, 33, new DateTimeZone('+01:00'));
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    
+    public function test_inequality_between_dates() : void
+    {
+        $q1 = DateTimeUTC::fromValues(2020, 1, 12, 11, 22, 33);
+        $q2 = DateTimeUTC::fromValues(2020, 12, 24, 11, 22, 33);
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
+    public function test_inequality_between_dates_with_different_timezones() : void
+    {
+        $q1 = DateTimeUTC::fromValues(2020, 1, 12, 11, 22, 33);
+        $q2 = DateTimeUTC::fromValues(2020, 1, 12, 11, 22, 33, new DateTimeZone('+01:00'));
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
+    
 }

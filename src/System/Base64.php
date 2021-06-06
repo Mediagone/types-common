@@ -19,7 +19,7 @@ final class Base64 implements ValueObject
     // Properties
     //========================================================================================================
     
-    private string $base64;
+    private string $value;
     
     
     
@@ -33,7 +33,7 @@ final class Base64 implements ValueObject
             throw new InvalidArgumentException("Invalid Base64 string ($base64)");
         }
         
-        $this->base64 = $base64;
+        $this->value = $base64;
     }
     
     
@@ -86,19 +86,30 @@ final class Base64 implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->base64;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->base64;
+        return $this->value;
     }
     
     
     public function decode() : string
     {
-        return base64_decode($this->base64);
+        return base64_decode($this->value);
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(Base64 $base64) : bool
+    {
+        return $this->value === $base64->value;
     }
     
     

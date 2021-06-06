@@ -300,4 +300,30 @@ final class DateTest extends TestCase
     
     
     
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    public function test_equality_between_dates() : void
+    {
+        $q1 = Date::fromString('2020-01-12');
+        $q2 = Date::fromString('2020-01-12');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_dates() : void
+    {
+        $q1 = Date::fromString('2020-01-12');
+        $q2 = Date::fromString('2020-12-24');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
+    
 }

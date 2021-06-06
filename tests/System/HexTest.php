@@ -170,4 +170,30 @@ final class HexTest extends TestCase
     
     
     
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    public function test_equality_between_hex() : void
+    {
+        $q1 = Hex::fromString('dede64f400');
+        $q2 = Hex::fromString('dede64f400');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_hex() : void
+    {
+        $q1 = Hex::fromString('dede64f400');
+        $q2 = Hex::fromString('dede64f');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
+    
 }

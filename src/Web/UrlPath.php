@@ -30,7 +30,7 @@ final class UrlPath implements ValueObject
     // Properties
     //========================================================================================================
     
-    private string $path;
+    private string $value;
     
     
     
@@ -44,7 +44,7 @@ final class UrlPath implements ValueObject
             throw new InvalidArgumentException('The supplied host path is invalid, got "' . $path . '".');
         }
         
-        $this->path = $path;
+        $this->value = $path;
     }
     
     
@@ -96,13 +96,24 @@ final class UrlPath implements ValueObject
     
     public function jsonSerialize()
     {
-        return $this->path;
+        return $this->value;
     }
     
     
     public function __toString() : string
     {
-        return $this->path;
+        return $this->value;
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations methods
+    //========================================================================================================
+    
+    public function equals(UrlPath $urlPath) : bool
+    {
+        return $this->value === $urlPath->value;
     }
     
     
