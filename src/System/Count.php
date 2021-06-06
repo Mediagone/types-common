@@ -92,6 +92,17 @@ final class Count implements ValueObject
     {
         return $this->value === $count->value;
     }
+    
+    
+    public function add(Count $count) : Count
+    {
+        return self::fromInt($this->value + $count->value);
+    }
+    
+    
+    public function subtract(Count $count) : Count
+    {
+        return self::fromInt($this->value - $count->value);
     }
     
     

@@ -89,6 +89,17 @@ final class Quantity implements ValueObject
     {
         return $this->value === $quantity->value;
     }
+    
+    
+    public function add(Quantity $quantity) : Quantity
+    {
+        return self::fromInt($this->value + $quantity->value);
+    }
+    
+    
+    public function subtract(Quantity $quantity) : Quantity
+    {
+        return self::fromInt($this->value - $quantity->value);
     }
     
     

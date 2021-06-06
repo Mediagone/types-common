@@ -115,4 +115,52 @@ final class DurationTest extends TestCase
     }
     
     
+    public function test_can_add_another_duration() : void
+    {
+        $q1 = Duration::fromSeconds(20);
+        $q2 = Duration::fromSeconds(13);
+        
+        self::assertNotSame($q1, $q2);
+        
+        $qSum1 = $q1->add($q2);
+        self::assertNotSame($qSum1, $q1);
+        self::assertNotSame($qSum1, $q2);
+        self::assertSame(33, $qSum1->toSeconds());
+        
+        $qSum2 = $q2->add($q1);
+        self::assertNotSame($qSum2, $q1);
+        self::assertNotSame($qSum2, $q2);
+        self::assertNotSame($qSum1, $qSum2);
+        self::assertSame(33, $qSum2->toSeconds());
+    }
+    
+    
+    public function test_can_subtract_another_duration() : void
+    {
+        $q1 = Duration::fromSeconds(20);
+        $q2 = Duration::fromSeconds(13);
+        
+        self::assertNotSame($q1, $q2);
+        
+        $qSum = $q1->subtract($q2);
+        
+        self::assertNotSame($qSum, $q1);
+        self::assertNotSame($qSum, $q2);
+        self::assertSame(7, $qSum->toSeconds());
+    }
+    
+    
+    public function test_cannot_subtract_greater_duration() : void
+    {
+        $q1 = Duration::fromSeconds(20);
+        $q2 = Duration::fromSeconds(13);
+        
+        self::assertNotSame($q1, $q2);
+        
+        $this->expectException(InvalidArgumentException::class);
+        $q2->subtract($q1);
+    }
+    
+    
+    
 }

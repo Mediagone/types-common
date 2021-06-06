@@ -132,5 +132,17 @@ final class Duration implements ValueObject
     }
     
     
+    public function add(Duration $age) : Duration
+    {
+        return self::fromSeconds($this->value + $age->value);
+    }
+    
+    
+    public function subtract(Duration $age) : Duration
+    {
+        return self::fromSeconds($this->value - $age->value);
+    }
+    
+    
     
 }

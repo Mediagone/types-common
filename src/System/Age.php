@@ -92,6 +92,17 @@ final class Age implements ValueObject
     {
         return $this->value === $age->value;
     }
+    
+    
+    public function add(Age $age) : Age
+    {
+        return self::fromInt($this->value + $age->value);
+    }
+    
+    
+    public function subtract(Age $age) : Age
+    {
+        return self::fromInt($this->value - $age->value);
     }
     
     
