@@ -16,9 +16,19 @@ final class DurationTest extends TestCase
     // Tests
     //========================================================================================================
     
-    public function test_can_be_created() : void
+    public function test_can_be_created_from_seconds() : void
     {
-        self::assertInstanceOf(Duration::class, Duration::fromSeconds(20));
+        self::assertSame(20, Duration::fromSeconds(20)->toSeconds());
+    }
+    
+    public function test_can_be_created_from_minutes() : void
+    {
+        self::assertSame(20*60, Duration::fromMinutes(20)->toSeconds());
+    }
+    
+    public function test_can_be_created_from_hours() : void
+    {
+        self::assertSame(2*60*60, Duration::fromHours(2)->toSeconds());
     }
     
     
