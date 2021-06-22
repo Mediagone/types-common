@@ -131,7 +131,7 @@ final class EmailAddress implements ValueObject
         $regex = '#^'
             . '[^@]{1,'.self::MAX_ATOM_LENGTH.'}'
             . '@'
-            . '[^\.]{1,'.self::MAX_DOMAIN_LENGTH.'}'
+            . '.{1,'.self::MAX_DOMAIN_LENGTH.'}'
             . '\.'
             . '.{'.self::MIN_EXTENSION_LENGTH.','.self::MAX_EXTENSION_LENGTH.'}'
             . '$#i';
@@ -146,13 +146,13 @@ final class EmailAddress implements ValueObject
             // local part
             . '('
             . '[a-z0-9]+' // starts with a letter or digit
-            . '([-\.]?' // allows hyphens or dots (not alongside each other)
+            . '([-.]?' // allows hyphens or dots (not alongside each other)
             . '[a-z0-9]+)*' // ends with letters or digits
             . ')'
             // domain part
             . '@('
             . '[a-z0-9]+' // starts with a letter or digit
-            . '(-?[a-z0-9]+)*' // allows hyphens (not alongside each other)
+            . '([-.]?[a-z0-9]+)*' // allows hyphens (not alongside each other)
             . ')'
             // extension part
             . '\.'

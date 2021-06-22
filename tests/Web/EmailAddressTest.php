@@ -162,6 +162,12 @@ final class EmailAddressTest extends TestCase
     }
     
     
+    public function test_domain_can_contain_subdomain() : void
+    {
+        self::assertInstanceOf(EmailAddress::class, EmailAddress::fromString('atom@sub.domain-with-hyphens.com'));
+    }
+    
+    
     public function test_domain_cannot_contain_alongside_hyphens() : void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -183,12 +189,6 @@ final class EmailAddressTest extends TestCase
     }
     
     
-    public function test_domain_cannot_contain_dots() : void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        EmailAddress::fromString('atom@dom.ain.com');
-        EmailAddress::fromString('atom@do.ma.in.com');
-    }
     
     
     public function test_domain_can_contain_uppercase() : void
