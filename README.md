@@ -26,6 +26,8 @@ All value objects implement a common `ValueObject` interface and `JsonSerializab
 - `Hash` (abstract class)
 - `HashBcrypt`
 - `HashArgon2id`
+- `RandomToken`
+- `RandomTokenHash`
 
 
 ### Geo
