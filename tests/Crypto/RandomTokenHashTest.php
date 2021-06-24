@@ -93,6 +93,19 @@ final class RandomTokenHashTest extends TestCase
     
     
     
+    public function test_can_be_created_from_binary_string() : void
+    {
+        $hash = '6ec991de3f13a604d3eef9651b47f966d798b05b1e9f5c9fee940ead094e3579cc25a5cd9ad9f80a0caec92b95ff54d67180448080f2c40fae6605e1877f9c4e';
+        $bin = hex2Bin($hash);
+        
+        $tokenHash = RandomTokenHash::fromBinaryString($bin);
+        
+        self::assertSame($hash, (string)$tokenHash);
+        self::assertSame($bin, $tokenHash->toBinaryString());
+    }
+    
+    
+    
     //========================================================================================================
     // Conversion tests
     //========================================================================================================

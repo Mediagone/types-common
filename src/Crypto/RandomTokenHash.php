@@ -47,6 +47,12 @@ final class RandomTokenHash implements ValueObject
     }
     
     
+    public static function fromBinaryString(string $binary) : self
+    {
+        return new self(bin2hex($binary));
+    }
+    
+    
     public static function fromToken(RandomToken $token) : self
     {
         return new self(self::hashToken($token));
