@@ -13,7 +13,7 @@ use function preg_match;
 /**
  * Represents a SHA512 hash representation of RandomToken.
  */
-final class RandomTokenHash implements ValueObject
+final class RandomTokenSha512 implements ValueObject
 {
     //========================================================================================================
     // Constants & Properties
@@ -97,7 +97,7 @@ final class RandomTokenHash implements ValueObject
     }
     
     
-    public function equals(RandomTokenHash $hash) : bool
+    public function equals(RandomTokenSha512 $hash) : bool
     {
         return $this->value === $hash->value;
     }
