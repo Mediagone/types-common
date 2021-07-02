@@ -11,9 +11,9 @@ use function preg_match;
 
 
 /**
- * Represents a SHA512 hash representation of RandomToken.
+ * Represents a SHA512 hash representation.
  */
-final class RandomTokenSha512 implements ValueObject
+final class Sha512 implements ValueObject
 {
     //========================================================================================================
     // Constants & Properties
@@ -47,15 +47,15 @@ final class RandomTokenSha512 implements ValueObject
     }
     
     
-    public static function fromBinaryString(string $binary) : self
+    public static function fromString(string $string) : self
     {
-        return new self(bin2hex($binary));
+        return new self(self::hashString($string));
     }
     
     
-    public static function fromToken(RandomToken $token) : self
+    public static function fromBinaryString(string $binary) : self
     {
-        return new self(self::hashToken($token));
+        return new self(bin2hex($binary));
     }
     
     
@@ -97,15 +97,9 @@ final class RandomTokenSha512 implements ValueObject
     }
     
     
-    public function equals(RandomTokenSha512 $hash) : bool
+    public function equals(Sha512 $hash) : bool
     {
         return $this->value === $hash->value;
-    }
-    
-    
-    public function verifyToken(RandomToken $token) : bool
-    {
-        return $this->value === self::hashToken($token);
     }
     
     
@@ -114,9 +108,9 @@ final class RandomTokenSha512 implements ValueObject
     // Helpers
     //========================================================================================================
     
-    private static function hashToken(RandomToken $token) : string
+    private static function hashString(string $string) : string
     {
-        return hash('sha512', (string)$token, false);
+        return hash('sha512', $string, false);
     }
     
     
