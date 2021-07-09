@@ -51,6 +51,7 @@ All value objects implement a common `ValueObject` interface and `JsonSerializab
 
 ### Text
 - `Name`
+- `NameDigit`
 - `Slug`
 - `Text`
 - `TextMedium`
