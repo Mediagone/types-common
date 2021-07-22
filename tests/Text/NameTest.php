@@ -28,45 +28,30 @@ final class NameTest extends TestCase
     }
     
     
-    public function test_can_be_empty() : void
+    
+    /**
+     * @dataProvider validProvider
+     */
+    public function test_can_contain_valid_characters($value) : void
     {
-        self::assertInstanceOf(Name::class, Name::fromString(''));
+        self::assertSame((string)$value, (string)Name::fromString((string)$value));
+    }
+    
+    public function validProvider()
+    {
+        yield [' '];
+        yield ['-'];
+        yield ["'"];
+        yield ['áéíóúàèëïöüçÁÉÍÓÚÀÈËÏÖÜÇ']; // diacritics_chars
+        yield ['abcdefghijklmnopqrstuvwxyz'];
+        yield ['ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
     }
     
     
-    public function test_can_contain_lowercase_letters() : void
+    public function test_cannot_be_empty() : void
     {
-        self::assertInstanceOf(Name::class, Name::fromString('abcdefghijklmnopqrstuvwxyz'));
-    }
-    
-    
-    public function test_can_contain_uppercase_letters() : void
-    {
-        self::assertInstanceOf(Name::class, Name::fromString('ABCDEFGHIJKLMNOPQRSTUVWXYZ'));
-    }
-    
-    
-    public function test_can_contain_spaces() : void
-    {
-        self::assertInstanceOf(Name::class, Name::fromString('A B C D'));
-    }
-    
-    
-    public function test_can_contain_hyphen() : void
-    {
-        self::assertInstanceOf(Name::class, Name::fromString('A-B-C-D'));
-    }
-    
-    
-    public function test_can_contain_apostrophe() : void
-    {
-        self::assertInstanceOf(Name::class, Name::fromString("A'B'C'D"));
-    }
-    
-    
-    public function test_can_contain_diacritics_chars() : void
-    {
-        self::assertInstanceOf(Name::class, Name::fromString('áéíóúàèëïöüç'.'ÁÉÍÓÚÀÈËÏÖÜÇ'));
+        $this->expectException(InvalidArgumentException::class);
+        Name::fromString('');
     }
     
     
