@@ -48,12 +48,13 @@ final class NameSpecialTest extends TestCase
         yield [7];
         yield [8];
         yield [9];
+        yield [' '];
         yield ['-'];
+        yield ["'"];
         yield ['_'];
         yield ['#'];
         yield ['~'];
         yield ['@'];
-        yield [' '];
         yield ['áéíóúàèëïöüçÁÉÍÓÚÀÈËÏÖÜÇ']; // diacritics_chars
         yield ['abcdefghijklmnopqrstuvwxyz'];
         yield ['ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
