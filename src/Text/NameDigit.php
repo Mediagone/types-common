@@ -29,7 +29,7 @@ final class NameDigit implements ValueObject
     
     public const REGEX_CHAR = "[- 'a-zA-ZÀ-ÖØ-öø-ÿ0-9]";
     
-    public const REGEX = '#^'.self::REGEX_CHAR.'{0,'.self::MAX_LENGTH.'}$#';
+    public const REGEX = '#^'.self::REGEX_CHAR.'{1,'.self::MAX_LENGTH.'}$#';
     
     
     

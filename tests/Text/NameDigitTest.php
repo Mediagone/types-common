@@ -28,58 +28,15 @@ final class NameDigitTest extends TestCase
     }
     
     
-    public function test_can_be_empty() : void
-    {
-        self::assertInstanceOf(NameDigit::class, NameDigit::fromString(''));
-    }
-    
-    
-    public function test_can_contain_lowercase_letters() : void
-    {
-        self::assertInstanceOf(NameDigit::class, NameDigit::fromString('abcdefghijklmnopqrstuvwxyz'));
-    }
-    
-    
-    public function test_can_contain_uppercase_letters() : void
-    {
-        self::assertInstanceOf(NameDigit::class, NameDigit::fromString('ABCDEFGHIJKLMNOPQRSTUVWXYZ'));
-    }
-    
-    
-    public function test_can_contain_spaces() : void
-    {
-        self::assertInstanceOf(NameDigit::class, NameDigit::fromString('A B C D'));
-    }
-    
-    
-    public function test_can_contain_hyphen() : void
-    {
-        self::assertInstanceOf(NameDigit::class, NameDigit::fromString('A-B-C-D'));
-    }
-    
-    
-    public function test_can_contain_apostrophe() : void
-    {
-        self::assertInstanceOf(NameDigit::class, NameDigit::fromString("A'B'C'D"));
-    }
-    
-    
-    public function test_can_contain_diacritics_chars() : void
-    {
-        self::assertInstanceOf(NameDigit::class, NameDigit::fromString('áéíóúàèëïöüç'.'ÁÉÍÓÚÀÈËÏÖÜÇ'));
-    }
-    
-    
     /**
-     * @dataProvider digitsProvider
+     * @dataProvider validProvider
      */
-    public function test_cannot_contain_digits($digit) : void
+    public function test_can_contain_valid_characters($value) : void
     {
-        //$this->expectException(InvalidArgumentException::class);
-        self::assertInstanceOf(NameDigit::class, NameDigit::fromString((string)$digit));
+        self::assertSame((string)$value, (string)NameDigit::fromString((string)$value));
     }
     
-    public function digitsProvider()
+    public function validProvider()
     {
         yield [0];
         yield [1];
@@ -91,6 +48,19 @@ final class NameDigitTest extends TestCase
         yield [7];
         yield [8];
         yield [9];
+        yield [' '];
+        yield ['-'];
+        yield ["'"];
+        yield ['áéíóúàèëïöüçÁÉÍÓÚÀÈËÏÖÜÇ']; // diacritics_chars
+        yield ['abcdefghijklmnopqrstuvwxyz'];
+        yield ['ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
+    }
+    
+    
+    public function test_cannot_be_empty() : void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        NameDigit::fromString('');
     }
     
     
