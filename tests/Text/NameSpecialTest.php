@@ -1,0 +1,150 @@
+<?php declare(strict_types=1);
+
+namespace Tests\Mediagone\Types\Common\Text;
+
+use InvalidArgumentException;
+use Mediagone\Types\Common\Text\NameSpecial;
+use PHPUnit\Framework\TestCase;
+
+
+/**
+ * @covers \Mediagone\Types\Common\Text\NameSpecial
+ */
+final class NameSpecialTest extends TestCase
+{
+    //========================================================================================================
+    // Tests
+    //========================================================================================================
+    
+    public function test_declares_regex_constant() : void
+    {
+        self::assertTrue(defined(NameSpecial::class . '::REGEX'));
+    }
+    
+    
+    public function test_declares_regex_char_constant() : void
+    {
+        self::assertTrue(defined(NameSpecial::class . '::REGEX_CHAR'));
+    }
+    
+    
+    /**
+     * @dataProvider validProvider
+     */
+    public function test_can_contain_valid_characters($value) : void
+    {
+        self::assertSame((string)$value, (string)NameSpecial::fromString((string)$value));
+    }
+    
+    public function validProvider()
+    {
+        yield [0];
+        yield [1];
+        yield [2];
+        yield [3];
+        yield [4];
+        yield [5];
+        yield [6];
+        yield [7];
+        yield [8];
+        yield [9];
+        yield ['-'];
+        yield ['_'];
+        yield ['#'];
+        yield ['~'];
+        yield ['@'];
+        yield [' '];
+        yield ['áéíóúàèëïöüçÁÉÍÓÚÀÈËÏÖÜÇ']; // diacritics_chars
+        yield ['abcdefghijklmnopqrstuvwxyz'];
+        yield ['ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
+    }
+    
+    
+    public function test_cannot_be_empty() : void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        NameSpecial::fromString('');
+    }
+    
+    
+    public function test_cannot_be_too_long() : void
+    {
+        foreach (range(1, NameSpecial::MAX_LENGTH) as $count) {
+            self::assertInstanceOf(NameSpecial::class, NameSpecial::fromString(str_repeat('a', $count)));
+        }
+        
+        $this->expectException(InvalidArgumentException::class);
+        self::assertInstanceOf(NameSpecial::class, NameSpecial::fromString(str_repeat('a', (NameSpecial::MAX_LENGTH + 1))));
+    }
+    
+    
+    
+    //========================================================================================================
+    // Conversion tests
+    //========================================================================================================
+    
+    public function test_can_be_encoded_to_json() : void
+    {
+        $value = 'Valid name';
+        $name = NameSpecial::fromString($value);
+        
+        self::assertSame($value, $name->jsonSerialize());
+    }
+    
+    
+    public function test_can_be_cast_to_string() : void
+    {
+        $value = 'Valid name';
+        $name = NameSpecial::fromString($value);
+        
+        self::assertSame($value, (string)$name);
+    }
+    
+    
+    
+    //========================================================================================================
+    // Misc
+    //========================================================================================================
+    
+    public function test_can_tell_value_is_valid() : void
+    {
+        self::assertTrue(NameSpecial::isValueValid('Valid name'));
+    }
+    
+    
+    public function test_can_tell_non_string_value_is_invalid() : void
+    {
+        self::assertFalse(NameSpecial::isValueValid(100));
+        self::assertFalse(NameSpecial::isValueValid(true));
+        self::assertFalse(NameSpecial::isValueValid(1.2));
+    }
+    
+    
+    
+    //========================================================================================================
+    // Operations tests
+    //========================================================================================================
+    
+    public function test_equality_between_names() : void
+    {
+        $q1 = NameSpecial::fromString('John');
+        $q2 = NameSpecial::fromString('John');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertTrue($q1->equals($q2));
+        self::assertTrue($q2->equals($q1));
+    }
+    
+    public function test_inequality_between_names() : void
+    {
+        $q1 = NameSpecial::fromString('John');
+        $q2 = NameSpecial::fromString('Jack');
+        
+        self::assertNotSame($q1, $q2);
+        self::assertFalse($q1->equals($q2));
+        self::assertFalse($q2->equals($q1));
+    }
+    
+    
+    
+}
