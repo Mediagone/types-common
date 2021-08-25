@@ -35,6 +35,7 @@ All value objects implement a common `ValueObject` interface and `JsonSerializab
 - `City`
 - `Country`
 - `Latitude`
+- `Longitude`
 
 ### Graphics
 - `Color`
