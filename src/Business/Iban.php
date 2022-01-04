@@ -6,8 +6,10 @@ use InvalidArgumentException;
 use Mediagone\Types\Common\Geo\Country;
 use Mediagone\Types\Common\ValueObject;
 use function preg_match;
+use function str_repeat;
 use function str_replace;
 use function str_split;
+use function strlen;
 use function strtoupper;
 use function substr;
 
@@ -228,6 +230,14 @@ final class Iban implements ValueObject
     public function __toString() : string
     {
         return $this->value;
+    }
+    
+    
+    public function toMasked() : string
+    {
+        return substr($this->value, 0, 5)
+              .str_repeat('_', strlen($this->value) - 8)
+              .substr($this->value, -3);
     }
     
     

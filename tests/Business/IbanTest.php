@@ -5,7 +5,6 @@ namespace Tests\Mediagone\Types\Common\Business;
 use InvalidArgumentException;
 use JsonSerializable;
 use Mediagone\Types\Common\Business\Iban;
-use Mediagone\Types\Common\Geo\Country;
 use PHPUnit\Framework\TestCase;
 use function json_encode;
 
@@ -445,6 +444,15 @@ final class IbanTest extends TestCase
         $iban = Iban::fromString($value);
         
         self::assertSame('00762011623852957', $iban->getBasicBankAccountNumber());
+    }
+    
+    
+    public function test_can_get_masked() : void
+    {
+        $value = 'CH9300762011623852957';
+        $iban = Iban::fromString($value);
+        
+        self::assertSame('CH930_____________957', $iban->toMasked());
     }
     
     
