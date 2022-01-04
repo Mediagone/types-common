@@ -22,6 +22,9 @@ $ composer require mediagone/types-common
 
 All value objects implement a common `ValueObject` interface and `JsonSerializable`. 
 
+### Business
+- `Iban`
+
 ### Crypto
 - `Hash` (abstract class)
 - `HashBcrypt`
