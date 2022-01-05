@@ -285,6 +285,7 @@ final class Country implements ValueObject
         ['name' => 'Kiribati', 'alpha2' => 'KI', 'alpha3' => 'KIR', 'number' => '296' , 'c' => null],
         ['name' => 'Korea (Democratic People\'s Republic of)', 'alpha2' => 'KP', 'alpha3' => 'PRK', 'number' => '408' , 'c' => null],
         ['name' => 'Korea (Republic of)', 'alpha2' => 'KR', 'alpha3' => 'KOR', 'number' => '410' , 'c' => null],
+        ['name' => 'Kosovo (Republic of)', 'alpha2' => 'XK', 'alpha3' => 'XKX', 'number' => '153' , 'c' => null],
         ['name' => 'Kuwait', 'alpha2' => 'KW', 'alpha3' => 'KWT', 'number' => '414' , 'c' => null],
         ['name' => 'Kyrgyzstan', 'alpha2' => 'KG', 'alpha3' => 'KGZ', 'number' => '417' , 'c' => null],
         ['name' => 'Lao People\'s Democratic Republic', 'alpha2' => 'LA', 'alpha3' => 'LAO', 'number' => '418' , 'c' => null],
