@@ -51,6 +51,7 @@ All value objects implement a common `ValueObject` interface and `JsonSerializab
 - `Count`
 - `Date`
 - `DateTimeUTC`
+- `DayOfMonth`
 - `Duration`
 - `Hex`
 - `Quantity`
