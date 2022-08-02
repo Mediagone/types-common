@@ -4,10 +4,9 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 [![Software License][ico-license]](LICENSE)
 
-Value Objects are small and **immutable** classes representing typed values usually implemented using PHP primitive types. However, objects can embed validation to ensure that your data is **always valid** without adding any check elsewhere in your code.
+Value Objects are small and **immutable** classes representing typed values usually implemented using PHP primitive types. However, objects can embed validation to ensure that your data is **always valid** without adding any check elsewhere in your code. That's why you should ALWAYS use Value Objects rather than primitive types!
 
-That's why you should ALWAYS use Value Objects rather than primitive types.
-
+This package provides most common types you can use in any project.
 
 ## Installation
 This package requires **PHP 7.4+**
@@ -18,9 +17,9 @@ $ composer require mediagone/types-common
 ```
 
 
-## List of available Value Objects
+## Available value-objects
 
-All value objects implement a common `ValueObject` interface and `JsonSerializable`. 
+All value-objects implement a common `ValueObject` interface and `JsonSerializable`. 
 
 ### Business
 - `Bic`
@@ -33,6 +32,7 @@ All value objects implement a common `ValueObject` interface and `JsonSerializab
 - `RandomToken`
 - `Sha512`
 
+_Note: all Hash* types are based on `Hash` base class, so they are perfectly interoperable._
 
 ### Geo
 - `Address`
