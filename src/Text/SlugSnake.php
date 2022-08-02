@@ -6,7 +6,10 @@ use InvalidArgumentException;
 use Mediagone\Types\Common\ValueObject;
 use function is_string;
 use function preg_match;
+use function preg_replace;
 use function strlen;
+use function strtolower;
+use function trim;
 
 
 /**
@@ -55,6 +58,32 @@ final class SlugSnake implements ValueObject
     public static function fromString(string $slug) : self
     {
         return new self($slug);
+    }
+    
+    
+    /**
+     * Slugify the given string and creates a new instance from it.
+     */
+    public static function slugify(string $string) : self
+    {
+        $string = strtolower($string);
+        
+        // Replace accentuated characters
+        $string = Slug::removeAccents($string);
+        
+        // Replace whitespaces by underscores
+        $string = preg_replace('@\s+@', '_', $string);
+        
+        // Replace everything (except letters and digits) by undercores
+        $string = preg_replace('@[^a-z0-9]+@', '_', $string);
+        
+        // Replace adjacent underscores
+        $string = preg_replace("@_+@", '_', $string);
+        
+        // Remove trailing and leading underscores
+        $string = trim($string, '_');
+        
+        return new self($string);
     }
     
     

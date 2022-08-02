@@ -26,13 +26,33 @@ final class SlugSnakeTest extends TestCase
     
     public function test_can_contain_lowercase_letters() : void
     {
-        self::assertInstanceOf(SlugSnake::class, SlugSnake::fromString('abcdefghijklmnopqrstuvwxyz'));
+        self::assertSame('abcdefghijklmnopqrstuvwxyz', (string)SlugSnake::fromString('abcdefghijklmnopqrstuvwxyz'));
     }
     
     
     public function test_can_contain_digits() : void
     {
-        self::assertInstanceOf(SlugSnake::class, SlugSnake::fromString('0123456789'));
+        self::assertSame('0123456789', (string)SlugSnake::fromString('0123456789'));
+    }
+    
+    
+    /**
+     * @dataProvider slugifyProvider
+     */
+    public function test_can_slugify_strings($originalString, $expectedSlug) : void
+    {
+        self::assertSame($expectedSlug, (string)SlugSnake::slugify($originalString));
+    }
+    
+    public function slugifyProvider()
+    {
+        yield ['Héhé', 'hehe'];
+        yield ['Hello world', 'hello_world'];
+        yield ['Hello_world', 'hello_world'];
+        yield ['Hello  world', 'hello_world'];
+        yield ['Hello&world', 'hello_world'];
+        yield ['Hello&', 'hello'];
+        yield ['Hello !', 'hello'];
     }
     
     
@@ -47,7 +67,7 @@ final class SlugSnakeTest extends TestCase
     
     public function uppercaseProvider() : array
     {
-        return array_map(function($l) { return [$l]; }, range('A', 'Z'));
+        return array_map(static function($l) { return [$l]; }, range('A', 'Z'));
     }
     
     
