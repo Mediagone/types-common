@@ -5,6 +5,9 @@ namespace Mediagone\Types\Common\Business;
 use InvalidArgumentException;
 use Mediagone\Types\Common\Geo\Country;
 use Mediagone\Types\Common\ValueObject;
+use function ctype_alnum;
+use function ctype_upper;
+use function ord;
 use function preg_match;
 use function str_repeat;
 use function str_replace;
@@ -286,7 +289,7 @@ final class Iban implements ValueObject
         foreach ($chars as $char) {
             // Convert uppercase characters to ordinals, starting with 10 for "A"
             if (ctype_upper($char)) {
-                $bigInt .= (\ord($char) - 55);
+                $bigInt .= (ord($char) - 55);
                 
                 continue;
             }
