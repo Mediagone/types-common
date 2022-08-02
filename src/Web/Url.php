@@ -35,7 +35,7 @@ final class Url implements ValueObject
     public const MAX_LENGTH = 1500;
     
     public const SCHEME_MAX_LENGTH = 8 ;
-    public const SCHEME_PATTERN = '(?<scheme>(?:http|https)://)';
+    public const SCHEME_PATTERN = '(?<scheme>(?:http|https):\/\/)';
     
     public const DOMAIN_MAX_LENGTH = 255 - self::SCHEME_MAX_LENGTH;
     public const DOMAIN_PATTERN = '(?<domain>'
@@ -44,7 +44,7 @@ final class Url implements ValueObject
         . ')';
     
     public const PATH_MAX_LENGTH = self::MAX_LENGTH - self::SCHEME_MAX_LENGTH - self::DOMAIN_MAX_LENGTH;
-    public const PATH_PATTERN = '(?:/['
+    public const PATH_PATTERN = '(?:\/['
         . 'abcdefghijklmnopqrstuvwxyz' // allow letters
         . '0123456789' // allow digits
         . '\-' // allow -
@@ -52,7 +52,7 @@ final class Url implements ValueObject
         . '\#' // allow #
         . '\[\]' // allow []
         . "'" // allow '
-        . '@!$&()*+,;=_~:/?%' // allow miscellaneous chars
+        . '@!$&()*+,;=_~:\/?%' // allow miscellaneous chars
         . ']*)';
     
     
