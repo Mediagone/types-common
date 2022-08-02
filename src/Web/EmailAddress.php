@@ -146,7 +146,7 @@ final class EmailAddress implements ValueObject
             // local part
             . '('
             . '[a-z0-9]+' // starts with a letter or digit
-            . '([-.]?' // allows hyphens or dots (not alongside each other)
+            . '([-_.]?' // allows hyphens, underscores or dots (not alongside each other)
             . '[a-z0-9]+)*' // ends with letters or digits
             . ')'
             // domain part
