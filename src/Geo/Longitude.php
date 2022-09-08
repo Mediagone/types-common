@@ -61,6 +61,7 @@ final class Longitude implements ValueObject
     // Methods
     //========================================================================================================
     
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->value;

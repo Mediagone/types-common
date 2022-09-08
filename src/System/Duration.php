@@ -94,6 +94,7 @@ final class Duration implements ValueObject
     // Methods
     //========================================================================================================
     
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->value;

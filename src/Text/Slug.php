@@ -123,6 +123,7 @@ final class Slug implements ValueObject
     // Methods
     //========================================================================================================
     
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->value;

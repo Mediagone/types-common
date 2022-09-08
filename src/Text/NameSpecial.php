@@ -90,6 +90,7 @@ final class NameSpecial implements ValueObject
     // Methods
     //========================================================================================================
     
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->value;

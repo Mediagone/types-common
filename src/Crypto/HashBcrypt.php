@@ -90,6 +90,7 @@ final class HashBcrypt extends Hash
     // Methods
     //========================================================================================================
     
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->value;

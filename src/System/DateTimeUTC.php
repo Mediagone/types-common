@@ -303,6 +303,7 @@ final class DateTimeUTC implements ValueObject
     // Methods
     //========================================================================================================
     
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->value->format(DateTimeInterface::ATOM);

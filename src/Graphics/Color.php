@@ -134,6 +134,7 @@ final class Color implements ValueObject
     // Serialization Methods
     //========================================================================================================
     
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return (string)$this;

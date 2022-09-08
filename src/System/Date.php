@@ -258,6 +258,7 @@ final class Date implements ValueObject
     // Methods
     //========================================================================================================
     
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->value->format('Y-m-d');
