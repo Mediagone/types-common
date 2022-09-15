@@ -45,6 +45,7 @@ final class NameTest extends TestCase
         yield ['áéíóúàèëïöüçÁÉÍÓÚÀÈËÏÖÜÇ']; // diacritics_chars
         yield ['abcdefghijklmnopqrstuvwxyz'];
         yield ['ABCDEFGHIJKLMNOPQRSTUVWXYZ'];
+        yield ['COMPOSIT-E NAM.E'];
     }
     
     
