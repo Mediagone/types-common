@@ -610,5 +610,15 @@ final class DateTimeUTCTest extends TestCase
     }
     
     
+    public function test_can_diff() : void
+    {
+        $i1 = DateTimeUTC::fromValues(2020, 1, 1, 10, 20, 35);
+        $i2 = DateTimeUTC::fromValues(2021, 3, 4, 14, 40, 15);
+        $interval = $i1->diff($i2);
+        
+        self::assertSame('1 2 3 4 19 40', $interval->format('%y %m %d %h %i %s'));
+    }
+    
+    
     
 }

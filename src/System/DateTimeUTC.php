@@ -2,6 +2,7 @@
 
 namespace Mediagone\Types\Common\System;
 
+use DateInterval;
 use DateTime;
 use DateTimeImmutable;
 use DateTimeInterface;
@@ -430,6 +431,12 @@ final class DateTimeUTC implements ValueObject
     public function equals(DateTimeUTC $date) : bool
     {
         return (string)$this === (string)$date;
+    }
+    
+    
+    public function diff(DateTimeUTC $date) : DateInterval
+    {
+        return $this->value->diff($date->value);
     }
     
     
