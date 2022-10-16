@@ -2,6 +2,7 @@
 
 namespace Tests\Mediagone\Types\Common\System;
 
+use DateInterval;
 use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
@@ -617,6 +618,17 @@ final class DateTimeUTCTest extends TestCase
         $interval = $i1->diff($i2);
         
         self::assertSame('1 2 3 4 19 40', $interval->format('%y %m %d %h %i %s'));
+    }
+    
+    
+    public function test_can_add_date_interval() : void
+    {
+        $i1 = DateTimeUTC::fromValues(2020, 1, 1, 10, 20, 35);
+        $interval = DateInterval::createFromDateString('+1 year +2 month +3 days +4 hours +19 minutes +40 seconds +22 microseconds');
+        $i2 = $i1->add($interval);
+        
+        self::assertNotSame($i1, $i2);
+        self::assertSame('1 2 3 4 19 40 22', $i1->diff($i2)->format('%y %m %d %h %i %s %f'));
     }
     
     

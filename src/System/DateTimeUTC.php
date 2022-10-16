@@ -440,5 +440,11 @@ final class DateTimeUTC implements ValueObject
     }
     
     
+    public function add(DateInterval $interval) : self
+    {
+        return new self($this->value->add($interval));
+    }
+    
+    
     
 }
