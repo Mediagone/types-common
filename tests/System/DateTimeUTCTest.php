@@ -4,6 +4,7 @@ namespace Tests\Mediagone\Types\Common\System;
 
 use DateInterval;
 use DateTime;
+use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
 use InvalidArgumentException;
@@ -551,6 +552,22 @@ final class DateTimeUTCTest extends TestCase
     public function test_can_be_converted_to_timestamp() : void
     {
         self::assertSame(DateTime::createFromFormat('!Y-m-d', '2020-01-12')->getTimestamp(), DateTimeUTC::fromFormat('2020-01-12', '!Y-m-d')->toTimestamp());
+    }
+    
+    public function test_can_be_converted_to_datetime() : void
+    {
+        $datetimeUtc = DateTimeUTC::fromFormat('2020-01-12', '!Y-m-d');
+        $dateTime = $datetimeUtc->toDatetime();
+        self::assertEquals(DateTime::createFromFormat('!Y-m-d', '2020-01-12'), $dateTime);
+        self::assertNotSame($dateTime, $datetimeUtc->toDatetime()); // check if it returns a new DateTime instance
+    }
+    
+    public function test_can_be_converted_to_datetimeimmutable() : void
+    {
+        $datetimeUtc = DateTimeUTC::fromFormat('2020-01-12', '!Y-m-d');
+        $dateTimeImmutable = DateTimeUTC::fromFormat('2020-01-12', '!Y-m-d')->toDatetimeImmutable();
+        self::assertEquals(DateTimeImmutable::createFromFormat('!Y-m-d', '2020-01-12'), $dateTimeImmutable);
+        self::assertNotSame($dateTimeImmutable, $datetimeUtc->toDatetimeImmutable()); // check if it returns a new DateTimeImmutable instance
     }
     
     public function test_can_serialize_to_json() : void
