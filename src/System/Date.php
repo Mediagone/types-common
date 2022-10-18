@@ -289,6 +289,18 @@ final class Date implements ValueObject
     }
     
     
+    public function toDatetime() : DateTime
+    {
+        return DateTime::createFromImmutable($this->value);
+    }
+    
+    
+    public function toDatetimeImmutable() : DateTimeImmutable
+    {
+        return clone $this->value;
+    }
+    
+    
     public function format(string $format) : string
     {
         return $this->value->format($format);
