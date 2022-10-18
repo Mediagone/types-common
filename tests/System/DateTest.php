@@ -82,8 +82,8 @@ final class DateTest extends TestCase
     
     public function test_can_be_created_from_format() : void
     {
-        $time = '2020-01-02';
-        $format = 'Y-m-d';
+        $time = '2020-01-02 11:22:33';
+        $format = 'Y-m-d H:i:s';
         
         $date = DateTime::createFromFormat($format, $time, new DateTimeZone('UTC'));
         $utcDate = Date::fromFormat($time, $format);
