@@ -54,6 +54,17 @@ final class DateTest extends TestCase
     }
     
     
+    public function test_can_be_created_from_timestamp() : void
+    {
+        $atomTime = '2020-01-12T11:22:33+00:00'; // time part should be ignored
+        
+        $datetime = DateTime::createFromFormat(DateTimeInterface::ATOM, $atomTime, new DateTimeZone('UTC'));
+        $date = Date::fromTimestamp($datetime->getTimestamp());
+        
+        self::assertSame($date->format(DateTimeInterface::ATOM), $date->format(DateTimeInterface::ATOM));
+    }
+    
+    
     public function test_can_be_created_from_string() : void
     {
         $formatDate = '2020-01-12';
