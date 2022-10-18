@@ -3,6 +3,7 @@
 namespace Tests\Mediagone\Types\Common\System;
 
 use DateTime;
+use DateTimeImmutable;
 use DateTimeZone;
 use InvalidArgumentException;
 use Mediagone\Types\Common\System\Date;
@@ -41,9 +42,15 @@ final class DateTest extends TestCase
     
     public function test_can_be_created_from_datetime() : void
     {
-        $format = '2020-08-01';
-        $date = new DateTime($format, new DateTimeZone('UTC'));
-        self::assertSame($format, (string)Date::fromDateTime($date));
+        $date = new DateTime('2020-08-01 11:22:33', new DateTimeZone('UTC'));
+        self::assertSame('2020-08-01', (string)Date::fromDateTime($date));
+    }
+    
+    
+    public function test_can_be_created_from_datetimeimmutable() : void
+    {
+        $date = new DateTimeImmutable('2020-08-01 11:22:33', new DateTimeZone('UTC'));
+        self::assertSame(DateTime::createFromFormat('Y-m-d H:i:s', '2020-08-01 00:00:00')->getTimestamp(), Date::fromDateTimeImmutable($date)->toTimestamp());
     }
     
     

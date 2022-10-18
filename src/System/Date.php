@@ -181,6 +181,12 @@ final class Date implements ValueObject
     }
     
     
+    public static function fromDateTimeImmutable(DateTimeImmutable $datetime) : self
+    {
+        return new self($datetime->setTime(0,0,0,0));
+    }
+    
+    
     public static function fromString(string $value) : self
     {
         $datetime = DateTimeImmutable::createFromFormat('!Y-m-d', $value);
