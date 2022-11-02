@@ -15,7 +15,7 @@ use function strtolower;
 use function substr;
 
 
-final class Hex implements ValueObject
+class Hex implements ValueObject
 {
     //========================================================================================================
     // Properties

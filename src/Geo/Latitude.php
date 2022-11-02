@@ -10,7 +10,7 @@ use function is_float;
 /**
  * Represents a Latitude value (-90 <= value <= 90).
  */
-final class Latitude implements ValueObject
+class Latitude implements ValueObject
 {
     //========================================================================================================
     // Properties

@@ -10,7 +10,7 @@ use function is_string;
 /**
  * Represents a Country (supports Alpha2 and Alpha3 country codes)
  */
-final class Country implements ValueObject
+class Country implements ValueObject
 {
     //========================================================================================================
     // Properties

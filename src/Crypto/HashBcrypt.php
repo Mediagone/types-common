@@ -13,7 +13,7 @@ use function preg_match;
 /**
  * Represents a Bcrypt encrypted hash (version 2 not supported for security reasons).
  */
-final class HashBcrypt extends Hash
+class HashBcrypt extends Hash
 {
     //========================================================================================================
     // Constants & Properties

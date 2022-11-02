@@ -10,7 +10,7 @@ use function is_int;
 /**
  * Represents an Age value (must be a positive integer, or zero).
  */
-final class Age implements ValueObject
+class Age implements ValueObject
 {
     //========================================================================================================
     // Properties

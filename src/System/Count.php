@@ -10,7 +10,7 @@ use function is_int;
 /**
  * Represents a Count (must be an positive integer, or zero).
  */
-final class Count implements ValueObject
+class Count implements ValueObject
 {
     //========================================================================================================
     // Properties

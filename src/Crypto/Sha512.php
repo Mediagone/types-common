@@ -13,7 +13,7 @@ use function preg_match;
 /**
  * Represents a SHA512 hash representation.
  */
-final class Sha512 implements ValueObject
+class Sha512 implements ValueObject
 {
     //========================================================================================================
     // Constants & Properties

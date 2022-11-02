@@ -18,7 +18,7 @@ use function time;
 /**
  * Represents an UTC DateTime in ATOM format.
  */
-final class DateTimeUTC implements ValueObject
+class DateTimeUTC implements ValueObject
 {
     //========================================================================================================
     // Properties

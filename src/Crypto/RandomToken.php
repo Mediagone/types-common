@@ -12,7 +12,7 @@ use function preg_match;
 /**
  * Represents a random hexadecimal token (40 chars long).
  */
-final class RandomToken implements ValueObject
+class RandomToken implements ValueObject
 {
     //========================================================================================================
     // Constants & Properties

@@ -12,7 +12,7 @@ use function is_int;
 /**
  * Class Duration
  */
-final class Duration implements ValueObject
+class Duration implements ValueObject
 {
     //========================================================================================================
     // Properties

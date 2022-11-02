@@ -20,7 +20,7 @@ use function trim;
  *      - can contain lowercase letters and digits
  *      - can contain hyphens (not consecutive)
  */
-final class SlugSnake implements ValueObject
+class SlugSnake implements ValueObject
 {
     //========================================================================================================
     // Constants

@@ -13,7 +13,7 @@ use function is_string;
 use function preg_match;
 
 
-final class Base64 implements ValueObject
+class Base64 implements ValueObject
 {
     //========================================================================================================
     // Properties

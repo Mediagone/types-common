@@ -10,7 +10,7 @@ use function is_int;
 /**
  * Represents a Day of a month (1-31 range).
  */
-final class DayOfMonth implements ValueObject
+class DayOfMonth implements ValueObject
 {
     //========================================================================================================
     // Properties

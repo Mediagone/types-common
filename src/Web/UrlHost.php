@@ -23,7 +23,7 @@ use function strlen;
  *          - can contain hyphens (not consecutive)
  *          - must start and end with a letter or a digit
  */
-final class UrlHost implements ValueObject
+class UrlHost implements ValueObject
 {
     //========================================================================================================
     // Properties

@@ -26,7 +26,7 @@ use function preg_match;
  *      {path}:
  *          - can contain letters and digits and the following chars: -.#[]'@!$&()*+,;=_~:/?%
  */
-final class Url implements ValueObject
+class Url implements ValueObject
 {
     //========================================================================================================
     // Constants

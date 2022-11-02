@@ -27,7 +27,7 @@ use function is_string;
  *          - 2 to 8 chars long
  *          - only letters
  */
-final class EmailAddress implements ValueObject
+class EmailAddress implements ValueObject
 {
     //========================================================================================================
     // Constants

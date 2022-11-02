@@ -22,7 +22,7 @@ use function substr;
  * 
  * @note Based on Symfony\Component\Validator\Constraints\IbanValidator
  */
-final class Iban implements ValueObject
+class Iban implements ValueObject
 {
     //========================================================================================================
     // Constants

@@ -16,7 +16,7 @@ use function strlen;
  *      - The value must start with a slash "/"
  *      - Can contain letters and digits and the following chars: @'!$&()[]*+-_~,.=;:/?%#
  */
-final class UrlPath implements ValueObject
+class UrlPath implements ValueObject
 {
     //========================================================================================================
     // Properties

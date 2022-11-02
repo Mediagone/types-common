@@ -13,7 +13,7 @@ use function str_pad;
 /**
  * Represents a Date in YYYY-MM-DD format.
  */
-final class Date implements ValueObject
+class Date implements ValueObject
 {
     //========================================================================================================
     // Constants

@@ -21,7 +21,7 @@ use function trim;
  *      - can contain lowercase letters and digits
  *      - can contain hyphens (not consecutive)
  */
-final class Slug implements ValueObject
+class Slug implements ValueObject
 {
     //========================================================================================================
     // Constants

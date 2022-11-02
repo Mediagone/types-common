@@ -16,7 +16,7 @@ use function strlen;
  *      - 0 to 38 chars long (up to 152 bytes)
  *      - can contain any printable characters
  */
-final class Address implements ValueObject
+class Address implements ValueObject
 {
     //========================================================================================================
     // Constants

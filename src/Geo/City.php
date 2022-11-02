@@ -19,7 +19,7 @@ use function strlen;
  *      - can contain spaces (between words only)
  *      - can contain apostrophe (between words only)
  */
-final class City implements ValueObject
+class City implements ValueObject
 {
     //========================================================================================================
     // Constants

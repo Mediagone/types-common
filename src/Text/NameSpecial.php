@@ -20,7 +20,7 @@ use function preg_match;
  *      - can contain spaces
  *      - can contain apostrophe
  */
-final class NameSpecial implements ValueObject
+class NameSpecial implements ValueObject
 {
     //========================================================================================================
     // Constants

@@ -10,7 +10,7 @@ use function is_float;
 /**
  * Represents a Longitude value (-180 <= value <= 180).
  */
-final class Longitude implements ValueObject
+class Longitude implements ValueObject
 {
     //========================================================================================================
     // Properties

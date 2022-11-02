@@ -18,7 +18,7 @@ use function preg_match;
  *      - can contain spaces
  *      - can contain apostrophe
  */
-final class Name implements ValueObject
+class Name implements ValueObject
 {
     //========================================================================================================
     // Constants

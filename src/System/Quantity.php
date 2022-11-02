@@ -7,7 +7,7 @@ use Mediagone\Types\Common\ValueObject;
 use function is_int;
 
 
-final class Quantity implements ValueObject
+class Quantity implements ValueObject
 {
     //========================================================================================================
     // Properties

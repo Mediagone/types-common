@@ -11,7 +11,7 @@ use function strtoupper;
 /**
  * Represents a BIC (Business Identifier Code).
  */
-final class Bic implements ValueObject
+class Bic implements ValueObject
 {
     //========================================================================================================
     // Constants

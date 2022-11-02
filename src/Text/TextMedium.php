@@ -11,7 +11,7 @@ use function strlen;
 /**
  * Represents a medium length Text string (~16 Mb max).
  */
-final class TextMedium implements ValueObject
+class TextMedium implements ValueObject
 {
     //========================================================================================================
     // Constants

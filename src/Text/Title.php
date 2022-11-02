@@ -19,7 +19,7 @@ use function preg_match;
  *      - can contain spaces
  *      - can contain special characters
  */
-final class Title implements ValueObject
+class Title implements ValueObject
 {
     //========================================================================================================
     // Constants

@@ -11,7 +11,7 @@ use function is_string;
 use function strlen;
 
 
-final class Binary implements ValueObject
+class Binary implements ValueObject
 {
     //========================================================================================================
     // Properties

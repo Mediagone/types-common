@@ -14,7 +14,7 @@ use function preg_match;
 /**
  * Represents an Argon2id encrypted hash.
  */
-final class HashArgon2id extends Hash
+class HashArgon2id extends Hash
 {
     //========================================================================================================
     // Constants & Properties

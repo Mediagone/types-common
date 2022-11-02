@@ -12,7 +12,7 @@ use function str_pad;
 use function str_split;
 
 
-final class Color implements ValueObject
+class Color implements ValueObject
 {
     //========================================================================================================
     // Constants
