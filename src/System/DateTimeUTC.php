@@ -153,7 +153,6 @@ class DateTimeUTC implements ValueObject
     
     public static function lastWednesday() : self
     {
-        
         return self::tomorrow()->modify('previous Wednesday');
     }
     
@@ -350,6 +349,18 @@ class DateTimeUTC implements ValueObject
     public function midnight() : self
     {
         return new self($this->value->setTime(23,59,59,999999));
+    }
+    
+    
+    public function isBefore(DateTimeUTC $date) : bool
+    {
+        return $this->value->getTimestamp() < $date->toTimestamp();
+    }
+    
+    
+    public function isAfter(DateTimeUTC $date) : bool
+    {
+        return $this->value->getTimestamp() > $date->toTimestamp();
     }
     
     

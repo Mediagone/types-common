@@ -588,6 +588,26 @@ final class DateTimeUTCTest extends TestCase
     // Operations tests
     //========================================================================================================
     
+    public function test_if_date_is_before() : void
+    {
+        $d1 = DateTimeUTC::fromValues(2020, 1, 12, 11, 22, 01);
+        $d2 = DateTimeUTC::fromValues(2020, 1, 12, 11, 22, 02);
+        
+        self::assertTrue($d1->isBefore($d2));
+        self::assertFalse($d1->isBefore($d1));
+        self::assertFalse($d2->isBefore($d1));
+    }
+    
+    public function test_if_date_is_after() : void
+    {
+        $d1 = DateTimeUTC::fromValues(2020, 1, 12, 11, 22, 01);
+        $d2 = DateTimeUTC::fromValues(2020, 1, 12, 11, 22, 02);
+        
+        self::assertFalse($d1->isAfter($d2));
+        self::assertFalse($d1->isAfter($d1));
+        self::assertTrue($d2->isAfter($d1));
+    }
+    
     public function test_equality_between_dates() : void
     {
         $q1 = DateTimeUTC::fromValues(2020, 1, 12, 11, 22, 33);
