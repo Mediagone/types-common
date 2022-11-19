@@ -150,7 +150,6 @@ class Date implements ValueObject
     
     public static function lastWednesday() : self
     {
-        
         return self::tomorrow()->modify('previous Wednesday');
     }
     
@@ -310,6 +309,18 @@ class Date implements ValueObject
     public function modify(string $modify) : self
     {
         return new self($this->value->modify($modify)->setTime(0, 0, 0, 0));
+    }
+    
+    
+    public function isBefore(Date $date) : bool
+    {
+        return $this->value->getTimestamp() < $date->toTimestamp();
+    }
+    
+    
+    public function isAfter(Date $date) : bool
+    {
+        return $this->value->getTimestamp() > $date->toTimestamp();
     }
     
     
