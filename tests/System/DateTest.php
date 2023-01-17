@@ -48,10 +48,32 @@ final class DateTest extends TestCase
     }
     
     
+    public function test_can_be_created_from_datetime_no_timezone() : void
+    {
+        $phpDate = new DateTime('2020-08-01 11:22:33', new DateTimeZone('Asia/Seoul'));
+        
+        $date = Date::fromDateTimeNoTimezone($phpDate);
+        self::assertSame('2020-08-01', $phpDate->format('Y-m-d'));
+        self::assertSame('Asia/Seoul', $phpDate->getTimezone()->getName());
+        self::assertSame('2020-08-01', (string)$date);
+    }
+    
+    
     public function test_can_be_created_from_datetimeimmutable() : void
     {
         $date = new DateTimeImmutable('2020-08-01 11:22:33', new DateTimeZone('UTC'));
         self::assertSame(DateTime::createFromFormat('Y-m-d H:i:s', '2020-08-01 00:00:00')->getTimestamp(), Date::fromDateTimeImmutable($date)->toTimestamp());
+    }
+    
+    
+    public function test_can_be_created_from_datetimeimmutable_no_timezone() : void
+    {
+        $phpDate = new DateTimeImmutable('2020-08-01 11:22:33', new DateTimeZone('Asia/Seoul'));
+        
+        $date = Date::fromDateTimeImmutableNoTimezone($phpDate);
+        self::assertSame('2020-08-01', $phpDate->format('Y-m-d'));
+        self::assertSame('Asia/Seoul', $phpDate->getTimezone()->getName());
+        self::assertSame('2020-08-01', (string)$date);
     }
     
     

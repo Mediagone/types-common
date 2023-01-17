@@ -180,9 +180,21 @@ class Date implements ValueObject
     }
     
     
+    public static function fromDateTimeNoTimezone(DateTime $datetime) : self
+    {
+        return new self(new DateTimeImmutable($datetime->format('Y-m-d'), self::getUTC()));
+    }
+    
+    
     public static function fromDateTimeImmutable(DateTimeImmutable $datetime) : self
     {
         return new self($datetime->setTime(0,0,0,0));
+    }
+    
+    
+    public static function fromDateTimeImmutableNoTimezone(DateTimeImmutable $datetime) : self
+    {
+        return new self(new DateTimeImmutable($datetime->format('Y-m-d'), self::getUTC()));
     }
     
     
