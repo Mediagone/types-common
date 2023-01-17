@@ -66,13 +66,13 @@ class Date implements ValueObject
             $datetime = $datetime->setTimezone(self::getUTC());
         }
         
-        $this->value = $datetime;
+        $this->value = $datetime->setTime(0, 0, 0, 0);
     }
     
     
-    public static function today(?DateTimeZone $timezone = null) : self
+    public static function today() : self
     {
-        $datetime = new DateTime('today', $timezone ?? self::getUTC());
+        $datetime = new DateTime('today', self::getUTC());
         $year = (int)$datetime->format('Y');
         $month = (int)$datetime->format('m');
         $day = (int)$datetime->format('d');
@@ -81,9 +81,9 @@ class Date implements ValueObject
     }
     
     
-    public static function tomorrow(?DateTimeZone $timezone = null) : self
+    public static function tomorrow() : self
     {
-        $datetime = new DateTime('tomorrow', $timezone ?? self::getUTC());
+        $datetime = new DateTime('tomorrow', self::getUTC());
         $year = (int)$datetime->format('Y');
         $month = (int)$datetime->format('m');
         $day = (int)$datetime->format('d');
@@ -92,9 +92,9 @@ class Date implements ValueObject
     }
     
     
-    public static function yesterday(?DateTimeZone $timezone = null) : self
+    public static function yesterday() : self
     {
-        $datetime = new DateTime('yesterday', $timezone ?? self::getUTC());
+        $datetime = new DateTime('yesterday', self::getUTC());
         $year = (int)$datetime->format('Y');
         $month = (int)$datetime->format('m');
         $day = (int)$datetime->format('d');
@@ -176,11 +176,11 @@ class Date implements ValueObject
     
     public static function fromDateTime(DateTime $datetime) : self
     {
-        return new self(DateTimeImmutable::createFromMutable($datetime)->setTime(0,0,0,0));
+        return new self(DateTimeImmutable::createFromMutable($datetime));
     }
     
     
-    public static function fromDateTimeNoTimezone(DateTime $datetime) : self
+    public static function fromDateTimeIgnoringTimezone(DateTime $datetime) : self
     {
         return new self(new DateTimeImmutable($datetime->format('Y-m-d'), self::getUTC()));
     }
@@ -188,11 +188,11 @@ class Date implements ValueObject
     
     public static function fromDateTimeImmutable(DateTimeImmutable $datetime) : self
     {
-        return new self($datetime->setTime(0,0,0,0));
+        return new self($datetime);
     }
     
     
-    public static function fromDateTimeImmutableNoTimezone(DateTimeImmutable $datetime) : self
+    public static function fromDateTimeImmutableIgnoringTimezone(DateTimeImmutable $datetime) : self
     {
         return new self(new DateTimeImmutable($datetime->format('Y-m-d'), self::getUTC()));
     }
@@ -204,6 +204,22 @@ class Date implements ValueObject
     }
     
     
+    public static function fromFormat(string $value, string $format, ?DateTimeZone $sourceTimezone = null) : self
+    {
+        // Ensure all datetime fields are reset if not specified in the format
+        if ($format[0] !== '!') {
+            $format = "!$format";
+        }
+        
+        $date = DateTimeImmutable::createFromFormat($format, $value, $sourceTimezone ?? static::getUTC());
+        if (! $date) {
+            throw new InvalidArgumentException("Invalid Date value ($value) or format ($format)");
+        }
+        
+        return new self($date);
+    }
+    
+    
     public static function fromString(string $value) : self
     {
         $datetime = DateTimeImmutable::createFromFormat('!Y-m-d', $value);
@@ -212,22 +228,6 @@ class Date implements ValueObject
         }
         
         return new self($datetime);
-    }
-    
-    
-    public static function fromFormat(string $value, string $format) : self
-    {
-        // Ensure all datetime fields are reset if not specified in the format
-        if ($format[0] !== '!') {
-            $format = "!$format";
-        }
-        
-        $date = DateTimeImmutable::createFromFormat($format, $value);
-        if (! $date) {
-            throw new InvalidArgumentException("Invalid Date value ($value) or format ($format)");
-        }
-        
-        return new self($date);
     }
     
     
@@ -320,7 +320,7 @@ class Date implements ValueObject
     
     public function modify(string $modify) : self
     {
-        return new self($this->value->modify($modify)->setTime(0, 0, 0, 0));
+        return new self($this->value->modify($modify));
     }
     
     

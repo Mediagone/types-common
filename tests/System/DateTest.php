@@ -4,11 +4,12 @@ namespace Tests\Mediagone\Types\Common\System;
 
 use DateTime;
 use DateTimeImmutable;
-use DateTimeInterface;
 use DateTimeZone;
 use InvalidArgumentException;
 use Mediagone\Types\Common\System\Date;
 use PHPUnit\Framework\TestCase;
+use function date_default_timezone_get;
+use function date_default_timezone_set;
 use function json_encode;
 use function range;
 
@@ -26,98 +27,114 @@ final class DateTest extends TestCase
     {
         $now = new DateTime('today', new DateTimeZone('UTC'));
         self::assertSame($now->format('Y-m-d'), (string)Date::today());
+        self::assertSame($now->format('Y-m-d H:i:sP'), Date::today()->format('Y-m-d H:i:sP'));
     }
     
     public function test_can_generate_yesterday() : void
     {
         $now = new DateTime('yesterday', new DateTimeZone('UTC'));
         self::assertSame($now->format('Y-m-d'), (string)Date::yesterday());
+        self::assertSame($now->format('Y-m-d H:i:sP'), Date::yesterday()->format('Y-m-d H:i:sP'));
     }
     
     public function test_can_generate_tomorrow() : void
     {
         $now = new DateTime('tomorrow', new DateTimeZone('UTC'));
         self::assertSame($now->format('Y-m-d'), (string)Date::tomorrow());
+        self::assertSame($now->format('Y-m-d H:i:sP'), Date::tomorrow()->format('Y-m-d H:i:sP'));
     }
     
     
     public function test_can_be_created_from_datetime() : void
     {
-        $date = new DateTime('2020-08-01 11:22:33', new DateTimeZone('UTC'));
-        self::assertSame('2020-08-01', (string)Date::fromDateTime($date));
-    }
-    
-    
-    public function test_can_be_created_from_datetime_no_timezone() : void
-    {
-        $phpDate = new DateTime('2020-08-01 11:22:33', new DateTimeZone('Asia/Seoul'));
-        
-        $date = Date::fromDateTimeNoTimezone($phpDate);
-        self::assertSame('2020-08-01', $phpDate->format('Y-m-d'));
-        self::assertSame('Asia/Seoul', $phpDate->getTimezone()->getName());
+        // Ignores Time part
+        $dt = new DateTime('2020-08-01 11:22:33', new DateTimeZone('UTC'));
+        $date = Date::fromDateTime($dt);
         self::assertSame('2020-08-01', (string)$date);
+        self::assertSame('2020-08-01 00:00:00+00:00', $date->format('Y-m-d H:i:sP'));
+    
+        // Ignores explicit timezone argument
+        $dt = new DateTime('2020-08-01 11:22:33', new DateTimeZone('Asia/Seoul'));
+        self::assertSame('2020-08-01', $dt->format('Y-m-d'));
+        self::assertSame('Asia/Seoul', $dt->getTimezone()->getName());
+        $date = Date::fromDateTimeIgnoringTimezone($dt);
+        self::assertSame('2020-08-01', (string)$date);
+        self::assertSame('2020-08-01 00:00:00+00:00', $date->format('Y-m-d H:i:sP'));
+    
+        // Ignores timezone in datetime
+        $dt = new DateTime('2020-08-01 11:22:33+10:00');
+        self::assertSame('2020-08-01', $dt->format('Y-m-d'));
+        self::assertSame('+10:00', $dt->getTimezone()->getName());
+        $date = Date::fromDateTimeIgnoringTimezone($dt);
+        self::assertSame('2020-08-01', (string)$date);
+        self::assertSame('2020-08-01 00:00:00+00:00', $date->format('Y-m-d H:i:sP'));
     }
     
     
     public function test_can_be_created_from_datetimeimmutable() : void
     {
-        $date = new DateTimeImmutable('2020-08-01 11:22:33', new DateTimeZone('UTC'));
-        self::assertSame(DateTime::createFromFormat('Y-m-d H:i:s', '2020-08-01 00:00:00')->getTimestamp(), Date::fromDateTimeImmutable($date)->toTimestamp());
-    }
-    
-    
-    public function test_can_be_created_from_datetimeimmutable_no_timezone() : void
-    {
-        $phpDate = new DateTimeImmutable('2020-08-01 11:22:33', new DateTimeZone('Asia/Seoul'));
-        
-        $date = Date::fromDateTimeImmutableNoTimezone($phpDate);
-        self::assertSame('2020-08-01', $phpDate->format('Y-m-d'));
-        self::assertSame('Asia/Seoul', $phpDate->getTimezone()->getName());
+        // Ignores Time part
+        $dt = new DateTimeImmutable('2020-08-01 11:22:33');
+        $date = Date::fromDateTimeImmutable($dt);
         self::assertSame('2020-08-01', (string)$date);
+        self::assertSame('2020-08-01 00:00:00+00:00', $date->format('Y-m-d H:i:sP'));
+    
+        // Ignores explicit timezone argument
+        $dt = new DateTimeImmutable('2020-08-01 11:22:33', new DateTimeZone('Asia/Seoul'));
+        self::assertSame('2020-08-01', $dt->format('Y-m-d'));
+        self::assertSame('Asia/Seoul', $dt->getTimezone()->getName());
+        self::assertSame('2020-08-01 00:00:00+00:00', Date::fromDateTimeImmutableIgnoringTimezone($dt)->format('Y-m-d H:i:sP'));
+    
+        // Ignores timezone in datetime
+        $dt = new DateTimeImmutable('2020-08-01 11:22:3+10:00');
+        self::assertSame('2020-08-01', $dt->format('Y-m-d'));
+        self::assertSame('+10:00', $dt->getTimezone()->getName());
+        self::assertSame('2020-08-01 00:00:00+00:00', Date::fromDateTimeImmutableIgnoringTimezone($dt)->format('Y-m-d H:i:sP'));
     }
     
     
     public function test_can_be_created_from_timestamp() : void
     {
-        $atomTime = '2020-01-12T11:22:33+00:00'; // time part should be ignored
-        
-        $datetime = DateTime::createFromFormat(DateTimeInterface::ATOM, $atomTime, new DateTimeZone('UTC'));
-        $date = Date::fromTimestamp($datetime->getTimestamp());
-        
-        self::assertSame($date->format(DateTimeInterface::ATOM), $date->format(DateTimeInterface::ATOM));
+        // Ignores Time part
+        $dt = DateTime::createFromFormat('Y-m-d H:i:s', '2020-01-12 11:22:33');
+        self::assertSame('2020-01-12 00:00:00+00:00', Date::fromTimestamp($dt->getTimestamp())->format('Y-m-d H:i:sP'));
+    
+        // Ignores explicit timezone argument
+        $dt = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', '2020-01-12 11:22:33', new DateTimeZone('Asia/Seoul'));
+        self::assertSame('2020-01-12 00:00:00+00:00', Date::fromTimestamp($dt->getTimestamp())->format('Y-m-d H:i:sP'));
+    
+        // Ignores timezone in datetime
+        $dt = DateTimeImmutable::createFromFormat('Y-m-d H:i:sP', '2020-01-12 11:22:33+10:00');
+        self::assertSame('2020-01-12 00:00:00+00:00', Date::fromTimestamp($dt->getTimestamp())->format('Y-m-d H:i:sP'));
     }
-    
-    
-    public function test_can_be_created_from_string() : void
-    {
-        $formatDate = '2020-01-12';
-        self::assertSame($formatDate, (string)Date::fromString($formatDate));
-    }
-    
-    public function test_cannot_be_created_from_invalid_string() : void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        Date::fromString('020-01-12:');
-    }
-    
     
     
     public function test_can_be_created_from_format() : void
     {
-        $time = '2020-01-02 11:22:33';
-        $format = 'Y-m-d H:i:s';
-        
-        $date = DateTime::createFromFormat($format, $time, new DateTimeZone('UTC'));
-        $utcDate = Date::fromFormat($time, $format);
-        
-        self::assertSame($date->format($format), $utcDate->format($format));
+        // Ignores Time part
+        $date = Date::fromFormat('2020-01-02 11:22:33', 'Y-m-d H:i:s');
+        self::assertSame('2020-01-02 00:00:00+00:00', $date->format('Y-m-d H:i:sP'));
+    
+        // Ignores explicit timezone argument
+        $date = Date::fromFormat('2020-01-02 23:22:33', 'Y-m-d H:i:s', new DateTimeZone('America/Anchorage'));
+        self::assertSame('2020-01-03 00:00:00+00:00', $date->format('Y-m-d H:i:sP'));
+    
+        // Ignores timezone in datetime
+        $date = Date::fromFormat('2020-01-02 23:22:33-10:00', 'Y-m-d H:i:sP');
+        self::assertSame('2020-01-03 00:00:00+00:00', $date->format('Y-m-d H:i:sP'));
+    
+        // Ignores PHP timezone
+        $tz = date_default_timezone_get();
+        date_default_timezone_set('America/Anchorage');
+        self::assertSame('2020-01-02 00:00:00+00:00', Date::fromFormat('2020-01-02 23:22:33', 'Y-m-d H:i:s')->format('Y-m-d H:i:sP'));
+        date_default_timezone_set($tz);
     }
     
     public function test_can_be_created_from_format_without_time() : void
     {
-        $utcDate = Date::fromFormat('2020-01-02', 'Y-m-d');
+        $date = Date::fromFormat('2020-01-02', 'Y-m-d');
         
-        self::assertSame('2020-01-02 00:00:00.000000', $utcDate->format('Y-m-d H:i:s.u'));
+        self::assertSame('2020-01-02 00:00:00.000000+00:00', $date->format('Y-m-d H:i:s.uP'));
     }
     
     public function test_cannot_be_created_from_invalid_format() : void
@@ -126,6 +143,34 @@ final class DateTest extends TestCase
         Date::fromFormat('2020-01-', 'Y-m-d');
     }
     
+    
+    public function test_can_be_created_from_string() : void
+    {
+        self::assertSame('2020-01-12 00:00:00+00:00', Date::fromString('2020-01-12')->format('Y-m-d H:i:sP'));
+    
+        // Ignores PHP timezone
+        $tz = date_default_timezone_get();
+        date_default_timezone_set('America/Anchorage');
+        self::assertSame('2020-01-12 00:00:00+00:00', Date::fromString('2020-01-12')->format('Y-m-d H:i:sP'));
+        date_default_timezone_set($tz);
+    }
+    
+    
+    /**
+     * @dataProvider invalidStringProvider
+     */
+    public function test_cannot_be_created_from_invalid_string(string $string) : void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        Date::fromString('020-01-12:');
+    }
+    
+    public function invalidStringProvider()
+    {
+        yield ['020-01-12:'];
+        yield ['invalid date string'];
+        yield ['2020-01-12 00:00:00']; // with time part
+    }
     
     
     public function test_can_be_created_from_values() : void
@@ -137,12 +182,12 @@ final class DateTest extends TestCase
             $utcDate = Date::fromValues($year, 1, 2);
             self::assertSame($year, $utcDate->getYear());
         }
-    
+        
         foreach (range(1,12) as $month) {
             $utcDate = Date::fromValues(2020, $month, 2);
             self::assertSame($month, $utcDate->getMonth());
         }
-    
+        
         foreach (range(1,31) as $day) {
             $utcDate = Date::fromValues(2020, 1, $day);
             self::assertSame($day, $utcDate->getDay());
@@ -260,16 +305,16 @@ final class DateTest extends TestCase
     public function test_can_check_if_value_is_invalid() : void
     {
         foreach ($this->invalidYearProvider() as $year) {
-            $atomTime = "{$year[0]}-01-01";
-            self::assertFalse(Date::isValueValid($atomTime), "year: {$year[0]}");
+            $dateString = "{$year[0]}-01-01";
+            self::assertFalse(Date::isValueValid($dateString), "year: {$year[0]}");
         }
         foreach ($this->invalidMonthProvider() as $month) {
-            $atomTime = "2020-{$month[0]}-01";
-            self::assertFalse(Date::isValueValid($atomTime), "month: {$month[0]}");
+            $dateString = "2020-{$month[0]}-01";
+            self::assertFalse(Date::isValueValid($dateString), "month: {$month[0]}");
         }
         foreach ($this->invalidDayProvider() as $day) {
-            $atomTime = "2020-01-{$day[0]}";
-            self::assertFalse(Date::isValueValid($atomTime), "day: {$day[0]}");
+            $dateString = "2020-01-{$day[0]}";
+            self::assertFalse(Date::isValueValid($dateString), "day: {$day[0]}");
         }
     }
     
@@ -339,7 +384,7 @@ final class DateTest extends TestCase
     {
         $date = Date::fromFormat('2020-01-12', 'Y-m-d');
         $dateTime = $date->toDatetime();
-        self::assertSame('2020-01-12 00:00:00', $dateTime->format('Y-m-d H:i:s'));
+        self::assertSame('2020-01-12 00:00:00+00:00', $dateTime->format('Y-m-d H:i:sP'));
         self::assertNotSame($dateTime, $date->toDatetime()); // check if it returns each time a new DateTime instance
     }
     
@@ -348,7 +393,7 @@ final class DateTest extends TestCase
     {
         $date = Date::fromFormat('2020-01-12', 'Y-m-d');
         $immutable = $date->toDatetimeImmutable();
-        self::assertSame('2020-01-12 00:00:00', $immutable->format('Y-m-d H:i:s'));
+        self::assertSame('2020-01-12 00:00:00+00:00', $immutable->format('Y-m-d H:i:sP'));
         self::assertNotSame($immutable, $date->toDatetimeImmutable()); // check if it returns each time a new DateTimeImmutable instance
     }
     
