@@ -336,13 +336,13 @@ class Date implements ValueObject
     }
     
     
-    public function isPast() : bool
+    public function isInPast() : bool
     {
         return $this->value->getTimestamp() < self::today()->toTimestamp();
     }
     
     
-    public function isFuture() : bool
+    public function isInFuture() : bool
     {
         return $this->value->getTimestamp() > self::today()->toTimestamp();
     }

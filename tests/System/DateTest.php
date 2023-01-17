@@ -251,19 +251,19 @@ final class DateTest extends TestCase
     // Getters Tests
     //========================================================================================================
     
-    public function test_can_tell_if_past() : void
+    public function test_can_tell_if_in_past() : void
     {
-        self::assertTrue(Date::yesterday()->isPast());
-        self::assertFalse(Date::today()->isPast());
-        self::assertFalse(Date::tomorrow()->isPast());
+        self::assertTrue(Date::yesterday()->isInPast());
+        self::assertFalse(Date::today()->isInPast());
+        self::assertFalse(Date::tomorrow()->isInPast());
     }
     
     
-    public function test_can_tell_if_future() : void
+    public function test_can_tell_if_in_future() : void
     {
-        self::assertFalse(Date::yesterday()->isFuture());
-        self::assertFalse(Date::today()->isFuture());
-        self::assertTrue(Date::tomorrow()->isFuture());
+        self::assertFalse(Date::yesterday()->isInFuture());
+        self::assertFalse(Date::today()->isInFuture());
+        self::assertTrue(Date::tomorrow()->isInFuture());
     }
     
     
