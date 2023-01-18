@@ -322,15 +322,15 @@ class DateTimeUTC implements ValueObject
     }
     
     
-    public function toDatetime() : DateTime
+    public function toDatetime(?DateTimeZone $timezone = null) : DateTime
     {
-        return DateTime::createFromImmutable($this->value);
+        return DateTime::createFromImmutable($this->value)->setTimezone($timezone ?? static::getUTC());
     }
     
     
-    public function toDatetimeImmutable() : DateTimeImmutable
+    public function toDatetimeImmutable(?DateTimeZone $timezone = null) : DateTimeImmutable
     {
-        return clone $this->value;
+        return (clone $this->value)->setTimezone($timezone ?? static::getUTC());
     }
     
     
