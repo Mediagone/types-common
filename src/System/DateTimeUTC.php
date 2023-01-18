@@ -105,75 +105,75 @@ class DateTimeUTC implements ValueObject
     
     /* Days of week */
     
-    public static function mondayThisWeek() : self
+    public static function mondayThisWeek(?DateTimeZone $timezone = null) : self
     {
-        return new self(new DateTimeImmutable('Monday this week', self::getUTC()));
+        return new self(new DateTimeImmutable('Monday this week', $timezone ?? self::getUTC()));
     }
     
-    public static function tuesdayThisWeek() : self
+    public static function tuesdayThisWeek(?DateTimeZone $timezone = null) : self
     {
-        return new self(new DateTimeImmutable('Tuesday this week', self::getUTC()));
+        return new self(new DateTimeImmutable('Tuesday this week', $timezone ?? self::getUTC()));
     }
     
-    public static function wednesdayThisWeek() : self
+    public static function wednesdayThisWeek(?DateTimeZone $timezone = null) : self
     {
         
-        return new self(new DateTimeImmutable('Wednesday this week', self::getUTC()));
+        return new self(new DateTimeImmutable('Wednesday this week', $timezone ?? self::getUTC()));
     }
     
-    public static function thursdayThisWeek() : self
+    public static function thursdayThisWeek(?DateTimeZone $timezone = null) : self
     {
-        return new self(new DateTimeImmutable('Thursday this week', self::getUTC()));
+        return new self(new DateTimeImmutable('Thursday this week', $timezone ?? self::getUTC()));
     }
     
-    public static function fridayThisWeek() : self
+    public static function fridayThisWeek(?DateTimeZone $timezone = null) : self
     {
-        return new self(new DateTimeImmutable('Friday this week', self::getUTC()));
+        return new self(new DateTimeImmutable('Friday this week', $timezone ?? self::getUTC()));
     }
     
-    public static function saturdayThisWeek() : self
+    public static function saturdayThisWeek(?DateTimeZone $timezone = null) : self
     {
-        return new self(new DateTimeImmutable('Saturday this week', self::getUTC()));
+        return new self(new DateTimeImmutable('Saturday this week', $timezone ?? self::getUTC()));
     }
     
-    public static function sundayThisWeek() : self
+    public static function sundayThisWeek(?DateTimeZone $timezone = null) : self
     {
-        return new self(new DateTimeImmutable('Sunday this week', self::getUTC()));
+        return new self(new DateTimeImmutable('Sunday this week', $timezone ?? self::getUTC()));
     }
     
-    public static function lastMonday() : self
+    public static function lastMonday(?DateTimeZone $timezone = null) : self
     {
-        return self::tomorrow()->modify('previous Monday');
+        return self::tomorrow($timezone)->modify('previous Monday');
     }
     
-    public static function lastTuesday() : self
+    public static function lastTuesday(?DateTimeZone $timezone = null) : self
     {
-        return self::tomorrow()->modify('previous Tuesday');
+        return self::tomorrow($timezone)->modify('previous Tuesday');
     }
     
-    public static function lastWednesday() : self
+    public static function lastWednesday(?DateTimeZone $timezone = null) : self
     {
-        return self::tomorrow()->modify('previous Wednesday');
+        return self::tomorrow($timezone)->modify('previous Wednesday');
     }
     
-    public static function lastThursday() : self
+    public static function lastThursday(?DateTimeZone $timezone = null) : self
     {
-        return self::tomorrow()->modify('previous Thursday');
+        return self::tomorrow($timezone)->modify('previous Thursday');
     }
     
-    public static function lastFriday() : self
+    public static function lastFriday(?DateTimeZone $timezone = null) : self
     {
-        return self::tomorrow()->modify('previous Friday');
+        return self::tomorrow($timezone)->modify('previous Friday');
     }
     
-    public static function lastSaturday() : self
+    public static function lastSaturday(?DateTimeZone $timezone = null) : self
     {
-        return self::tomorrow()->modify('previous Saturday');
+        return self::tomorrow($timezone)->modify('previous Saturday');
     }
     
-    public static function lastSunday() : self
+    public static function lastSunday(?DateTimeZone $timezone = null) : self
     {
-        return self::tomorrow()->modify('previous Sunday');
+        return self::tomorrow($timezone)->modify('previous Sunday');
     }
     
     
