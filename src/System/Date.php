@@ -179,7 +179,6 @@ class Date implements ValueObject
         return new self(DateTimeImmutable::createFromMutable($datetime));
     }
     
-    
     public static function fromDateTimeIgnoringTimezone(DateTime $datetime) : self
     {
         return new self(new DateTimeImmutable($datetime->format('Y-m-d'), self::getUTC()));
@@ -190,7 +189,6 @@ class Date implements ValueObject
     {
         return new self($datetime);
     }
-    
     
     public static function fromDateTimeImmutableIgnoringTimezone(DateTimeImmutable $datetime) : self
     {
@@ -222,7 +220,7 @@ class Date implements ValueObject
     
     public static function fromString(string $value) : self
     {
-        $datetime = DateTimeImmutable::createFromFormat('!Y-m-d', $value);
+        $datetime = DateTimeImmutable::createFromFormat('!Y-m-d', $value, self::getUTC());
         if (! $datetime) {
             throw new InvalidArgumentException("Invalid Date value ($value), it must follow 'Y-m-d' format.");
         }
