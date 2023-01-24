@@ -218,9 +218,9 @@ class Date implements ValueObject
     }
     
     
-    public static function fromString(string $value) : self
+    public static function fromString(string $value, ?DateTimeZone $sourceTimezone = null) : self
     {
-        $datetime = DateTimeImmutable::createFromFormat('!Y-m-d', $value, self::getUTC());
+        $datetime = DateTimeImmutable::createFromFormat('!Y-m-d', $value, $sourceTimezone ?? self::getUTC());
         if (! $datetime) {
             throw new InvalidArgumentException("Invalid Date value ($value), it must follow 'Y-m-d' format.");
         }

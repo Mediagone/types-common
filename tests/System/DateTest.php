@@ -184,7 +184,7 @@ final class DateTest extends TestCase
         self::assertSame('2020-01-02 00:00:00.000000+00:00', $date->format('Y-m-d H:i:s.uP'));
     }
     
-    public function test_cannot_be_created_from_string_not_matching_supplied_format() : void
+    public function test_cannot_be_created_from_format_with_invalid_string() : void
     {
         $this->expectException(InvalidArgumentException::class);
         Date::fromFormat('2020-01-', 'Y-m-d');
@@ -194,12 +194,18 @@ final class DateTest extends TestCase
     public function test_can_be_created_from_string() : void
     {
         self::assertSame('2020-01-12 00:00:00+00:00', Date::fromString('2020-01-12')->format('Y-m-d H:i:sP'));
-    
+        
         // Ignores PHP default timezone
         $tz = date_default_timezone_get();
         date_default_timezone_set('America/Anchorage');
         self::assertSame('2020-01-12 00:00:00+00:00', Date::fromString('2020-01-12')->format('Y-m-d H:i:sP'));
         date_default_timezone_set($tz);
+    }
+    
+    public function test_can_be_created_from_string_with_explicit_source_timezone() : void
+    {
+        $date = Date::fromString('2020-01-02', new DateTimeZone('Asia/Seoul')); // UTC+9
+        self::assertSame('2020-01-01 00:00:00+00:00', $date->format('Y-m-d H:i:sP'));
     }
     
     
