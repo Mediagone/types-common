@@ -683,4 +683,19 @@ final class DateTimeUTCTest extends TestCase
     
     
     
+    //========================================================================================================
+    // Other
+    //========================================================================================================
+    
+    public function test_class_can_be_overloaded() : void
+    {
+        $datetimeBerlinClass = FakeDateTimeUTCPlusOne::fromFormat('2020-01-12 00:02:03+00:00', 'Y-m-d H:i:sP');
+        
+        self::assertInstanceOf(DateTimeUTC::class, $datetimeBerlinClass);
+        self::assertInstanceOf(FakeDateTimeUTCPlusOne::class, $datetimeBerlinClass);
+        self::assertSame('2020-01-12T01:02:03+01:00', (string)$datetimeBerlinClass);
+    }
+    
+    
+    
 }
