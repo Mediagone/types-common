@@ -359,6 +359,61 @@ final class DateTimeUTCTest extends TestCase
     }
     
     
+    public function test_can_get_year() : void
+    {
+        $datetime = DateTimeUTC::fromString('2020-12-31T23:59:59+00:00');
+        self::assertSame(2020, $datetime->getYear());
+        
+        $datetime = DateTimeUTC::fromString('2020-12-31T23:59:59-10:00');
+        self::assertSame(2021, $datetime->getYear());
+    }
+    
+    public function test_can_get_month() : void
+    {
+        $datetime = DateTimeUTC::fromString('2020-12-31T23:59:59+00:00');
+        self::assertSame(12, $datetime->getMonth());
+    
+        $datetime = DateTimeUTC::fromString('2020-12-31T23:59:59-10:00');
+        self::assertSame(1, $datetime->getMonth());
+    }
+    
+    public function test_can_get_day() : void
+    {
+        $datetime = DateTimeUTC::fromString('2020-12-31T23:59:59+00:00');
+        self::assertSame(31, $datetime->getDay());
+    
+        $datetime = DateTimeUTC::fromString('2020-12-31T23:59:59-10:00');
+        self::assertSame(1, $datetime->getDay());
+    }
+    
+    public function test_can_get_hours() : void
+    {
+        $datetime = DateTimeUTC::fromString('2020-12-31T23:48:59+00:00');
+        self::assertSame(23, $datetime->getHours());
+        
+        $datetime = DateTimeUTC::fromString('2020-12-31T23:48:59-10:00');
+        self::assertSame(9, $datetime->getHours());
+    }
+    
+    public function test_can_get_minutes() : void
+    {
+        $datetime = DateTimeUTC::fromString('2020-12-31T23:48:59+00:00');
+        self::assertSame(48, $datetime->getMinutes());
+        
+        $datetime = DateTimeUTC::fromString('2020-12-31T23:48:59-10:00');
+        self::assertSame(48, $datetime->getMinutes());
+    }
+    
+    public function test_can_get_seconds() : void
+    {
+        $datetime = DateTimeUTC::fromString('2020-12-31T23:48:59+00:00');
+        self::assertSame(59, $datetime->getSeconds());
+        
+        $datetime = DateTimeUTC::fromString('2020-12-31T23:48:59-10:00');
+        self::assertSame(59, $datetime->getSeconds());
+    }
+    
+    
     public function test_can_tell_if_past() : void
     {
         self::assertTrue(DateTimeUTC::yesterday()->isPast());
