@@ -24,9 +24,14 @@ class DateTimeUTC implements ValueObject
     // Properties
     //========================================================================================================
     
+    private DateTimeImmutable $value;
+    
     private static ?DateTimeZone $utc = null;
     
-    private static function getReferenceTimezone() : DateTimeZone
+    /**
+     * @note This method can be overloaded to create DateTime classes based on other timezones (eg. DateTimeBerlin)
+     */
+    protected static function getReferenceTimezone() : DateTimeZone
     {
         if (self::$utc === null) {
             self::$utc = new DateTimeZone('UTC');
@@ -34,10 +39,6 @@ class DateTimeUTC implements ValueObject
         
         return self::$utc;
     }
-    
-    
-    private DateTimeImmutable $value;
-    
     
     
     
@@ -66,7 +67,6 @@ class DateTimeUTC implements ValueObject
         $seconds = (int)$datetime->format('s');
         
         return static::fromValues($year, $month, $day, $hours, $minutes, $seconds, static::getReferenceTimezone());
-        
     }
     
     
