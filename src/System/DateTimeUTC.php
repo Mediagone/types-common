@@ -331,8 +331,12 @@ class DateTimeUTC implements ValueObject
     }
     
     
-    public function format(string $format) : string
+    public function format(string $format, ?DateTimeZone $outputTimezone = null) : string
     {
+        if ($outputTimezone) {
+            return $this->value->setTimezone($outputTimezone)->format($format);
+        }
+        
         return $this->value->format($format);
     }
     

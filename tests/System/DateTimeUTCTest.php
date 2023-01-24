@@ -549,6 +549,15 @@ final class DateTimeUTCTest extends TestCase
         self::assertSame($time, (string)$utcDate);
     }
     
+    public function test_can_be_formatted() : void
+    {
+        $datetime = DateTimeUTC::fromString('2020-01-12T11:22:33+09:00');
+        self::assertSame('2020-01-12 02:22:33+00:00', $datetime->format('Y-m-d H:i:sP'));
+        
+        // With output timezone
+        $datetime = DateTimeUTC::fromString('2020-01-12T11:22:33+10:00');
+        self::assertSame('2020-01-12 10:22:33+09:00', $datetime->format('Y-m-d H:i:sP', new DateTimeZone('Asia/Seoul'))); // UTC+9
+    }
     
     public function test_can_be_converted_to_timestamp() : void
     {
