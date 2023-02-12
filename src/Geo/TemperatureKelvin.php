@@ -3,14 +3,13 @@
 namespace Mediagone\Types\Common\Geo;
 
 use InvalidArgumentException;
-use Mediagone\Types\Common\ValueObject;
 use function is_float;
 
 
 /**
  * Represents a Kelvin Temperature value and provides easy conversion to Celsius and Fahrenheit temperatures.
  */
-class TemperatureKelvin implements ValueObject
+class TemperatureKelvin implements Temperature
 {
     //========================================================================================================
     // Properties
@@ -89,6 +88,11 @@ class TemperatureKelvin implements ValueObject
     public function toFahrenheit() : TemperatureFahrenheit
     {
         return TemperatureFahrenheit::fromFloat(($this->value - 273.15) * 9.0 / 5.0 + 32);
+    }
+    
+    public function toKelvin() : TemperatureKelvin
+    {
+        return self::fromFloat($this->value);
     }
     
     
