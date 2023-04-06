@@ -450,6 +450,14 @@ final class DateTest extends TestCase
         self::assertNotSame($immutable, $date->toDatetimeImmutable()); // check if it returns each time a new DateTimeImmutable instance
     }
     
+    
+    public function test_can_be_converted_to_datetimeutc() : void
+    {
+        $date = Date::fromString('2020-01-12');
+        $datetimeUTC = $date->toDatetimeUTC();
+        self::assertSame('2020-01-12 00:00:00+00:00', $datetimeUTC->format('Y-m-d H:i:sP'));
+    }
+    
     public function test_can_serialize_to_json() : void
     {
         self::assertSame('"2020-01-12"', json_encode(Date::fromString('2020-01-12')));

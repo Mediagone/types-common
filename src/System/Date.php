@@ -309,6 +309,11 @@ class Date implements ValueObject
         return (clone $this->value)->setTimezone($timezone ?? static::getUTC());
     }
     
+    public function toDatetimeUTC() : DateTimeUTC
+    {
+        return DateTimeUTC::fromFormat($this->value->format('Y-m-d'), '!Y-m-d');
+    }
+    
     
     public function format(string $format) : string
     {
