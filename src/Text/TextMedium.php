@@ -43,6 +43,9 @@ class TextMedium implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromString(string $text) : self
     {
         return new self($text);

@@ -35,6 +35,9 @@ class Binary implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromString(string $binaryString) : self
     {
         return new self($binaryString);

@@ -33,7 +33,9 @@ class Longitude implements ValueObject
         $this->value = $longitude;
     }
     
-    
+    /**
+     * @return static
+     */
     public static function fromFloat(float $longitude) : self
     {
         return new self($longitude);

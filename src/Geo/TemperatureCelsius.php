@@ -33,6 +33,9 @@ class TemperatureCelsius implements Temperature
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromFloat(float $celsius) : self
     {
         return new self($celsius);

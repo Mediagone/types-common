@@ -33,6 +33,9 @@ class TemperatureKelvin implements Temperature
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromFloat(float $kelvin) : self
     {
         return new self($kelvin);

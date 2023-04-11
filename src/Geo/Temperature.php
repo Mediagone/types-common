@@ -10,6 +10,9 @@ use Mediagone\Types\Common\ValueObject;
  */
 interface Temperature extends ValueObject
 {
+    /**
+     * @return static
+     */
     public static function fromFloat(float $celsius) : self;
     public function toFloat() : float;
     public function toCelsius() : TemperatureCelsius;

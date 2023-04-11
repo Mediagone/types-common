@@ -34,6 +34,9 @@ class DayOfMonth implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromInt(int $dayOfMonth) : self
     {
         return new self($dayOfMonth);

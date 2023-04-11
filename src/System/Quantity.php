@@ -30,7 +30,9 @@ class Quantity implements ValueObject
         $this->value = $quantity;
     }
     
-    
+    /**
+     * @return static
+     */
     public static function fromInt(int $quantity) : self
     {
         return new self($quantity);

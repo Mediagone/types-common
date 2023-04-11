@@ -39,6 +39,9 @@ class Hex implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function random(int $length) : self
     {
         if ($length < 1) {
@@ -56,6 +59,9 @@ class Hex implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromString(string $hex) : self
     {
         return new self($hex);

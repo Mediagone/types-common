@@ -55,6 +55,7 @@ class Slug implements ValueObject
     
     /**
      * Creates a new instance from the given string.
+     * @return static
      */
     public static function fromString(string $slug) : self
     {
@@ -64,6 +65,7 @@ class Slug implements ValueObject
     
     /**
      * Slugify the given string and creates a new instance from it.
+     * @return static
      */
     public static function slugify(string $string) : self
     {

@@ -60,6 +60,7 @@ class Title implements ValueObject
     
     /**
      * Creates a new instance from the given string.
+     * @return static
      */
     public static function fromString(string $title) : self
     {

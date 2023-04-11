@@ -34,6 +34,9 @@ class Count implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromInt(int $count) : self
     {
         return new self($count);

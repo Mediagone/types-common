@@ -23,7 +23,7 @@ class Duration implements ValueObject
     
     
     //========================================================================================================
-    // Constructor
+    // Constructors
     //========================================================================================================
     
     private function __construct(int $duration)
@@ -36,12 +36,18 @@ class Duration implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromSeconds(int $duration) : self
     {
         return new self($duration);
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromMinutes(int $minutes) : self
     {
         return new self($minutes * 60);

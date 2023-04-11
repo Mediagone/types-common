@@ -38,18 +38,27 @@ class RandomToken implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function random() : self
     {
         return new self(Hex::random(self::LENGTH));
     }
     
     
-    final public static function fromHex(Hex $hex)
+    /**
+     * @return static
+     */
+    final public static function fromHex(Hex $hex) : self
     {
         return new self($hex);
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromHexString(string $hexString) : self
     {
         if (! self::isValueValid($hexString)) {

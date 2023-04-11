@@ -33,6 +33,9 @@ class TemperatureFahrenheit implements Temperature
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromFloat(float $fahrenheit) : self
     {
         return new self($fahrenheit);

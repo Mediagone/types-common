@@ -41,18 +41,27 @@ class Sha512 implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromHash(string $hash) : self
     {
         return new self($hash);
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromString(string $string) : self
     {
         return new self(self::hashString($string));
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromBinaryString(string $binary) : self
     {
         return new self(bin2hex($binary));

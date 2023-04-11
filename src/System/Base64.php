@@ -37,6 +37,9 @@ class Base64 implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromString(string $string) : self
     {
         return new self(base64_encode($string));

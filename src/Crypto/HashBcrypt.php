@@ -39,6 +39,9 @@ class HashBcrypt extends Hash
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromHash(string $hash) : self
     {
         return new self($hash);
@@ -47,6 +50,7 @@ class HashBcrypt extends Hash
     
     /**
      * Encrypts the given string and creates a bcrypt hash from it.
+     * @return static
      */
     public static function fromString(string $plainString, array $options = []) : self
     {

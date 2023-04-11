@@ -34,6 +34,9 @@ class Latitude implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromFloat(float $latitude) : self
     {
         return new self($latitude);

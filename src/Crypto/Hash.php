@@ -11,6 +11,9 @@ use Mediagone\Types\Common\ValueObject;
  */
 abstract class Hash implements ValueObject
 {
+    /**
+     * @return static
+     */
     public static function fromHash(string $hash) : self
     {
         $infos = password_get_info($hash);
@@ -25,6 +28,9 @@ abstract class Hash implements ValueObject
         throw new LogicException('This hash algorithm('.$infos['algo'].') is not supported.');
     }
     
+    /**
+     * @return static
+     */
     abstract public static function fromString(string $plainString, array $options = []) : self;
     
     abstract public function verifyString(string $plainString) : bool;

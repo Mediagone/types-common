@@ -42,6 +42,9 @@ class HashArgon2id extends Hash
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromHash(string $hash) : self
     {
         return new self($hash);
@@ -50,6 +53,7 @@ class HashArgon2id extends Hash
     
     /**
      * Encrypts the given string and creates an argon2id hash from it.
+     * @return static
      */
     public static function fromString(string $plainString, array $options = []) : self
     {

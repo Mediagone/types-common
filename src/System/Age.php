@@ -34,6 +34,9 @@ class Age implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromInt(int $age) : self
     {
         return new self($age);

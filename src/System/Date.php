@@ -69,7 +69,9 @@ class Date implements ValueObject
         $this->value = $datetime->setTime(0, 0, 0, 0);
     }
     
-    
+    /**
+     * @return static
+     */
     public static function today() : self
     {
         $datetime = new DateTime('today', self::getUTC());
@@ -81,6 +83,9 @@ class Date implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function tomorrow() : self
     {
         $datetime = new DateTime('tomorrow', self::getUTC());
@@ -92,6 +97,9 @@ class Date implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function yesterday() : self
     {
         $datetime = new DateTime('yesterday', self::getUTC());
@@ -102,106 +110,166 @@ class Date implements ValueObject
         return self::fromValues($year, $month, $day);
     }
     
+    /**
+     * @return static
+     */
     public static function mondayThisWeek() : self
     {
         return new self(new DateTimeImmutable('Monday this week', self::getUTC()));
     }
     
+    /**
+     * @return static
+     */
     public static function tuesdayThisWeek() : self
     {
         return new self(new DateTimeImmutable('Tuesday this week', self::getUTC()));
     }
     
+    /**
+     * @return static
+     */
     public static function wednesdayThisWeek() : self
     {
         
         return new self(new DateTimeImmutable('Wednesday this week', self::getUTC()));
     }
     
+    /**
+     * @return static
+     */
     public static function thursdayThisWeek() : self
     {
         return new self(new DateTimeImmutable('Thursday this week', self::getUTC()));
     }
     
+    /**
+     * @return static
+     */
     public static function fridayThisWeek() : self
     {
         return new self(new DateTimeImmutable('Friday this week', self::getUTC()));
     }
     
+    /**
+     * @return static
+     */
     public static function saturdayThisWeek() : self
     {
         return new self(new DateTimeImmutable('Saturday this week', self::getUTC()));
     }
     
+    /**
+     * @return static
+     */
     public static function sundayThisWeek() : self
     {
         return new self(new DateTimeImmutable('Sunday this week', self::getUTC()));
     }
     
+    /**
+     * @return static
+     */
     public static function lastMonday() : self
     {
         return self::tomorrow()->modify('previous Monday');
     }
     
+    /**
+     * @return static
+     */
     public static function lastTuesday() : self
     {
         return self::tomorrow()->modify('previous Tuesday');
     }
     
+    /**
+     * @return static
+     */
     public static function lastWednesday() : self
     {
         return self::tomorrow()->modify('previous Wednesday');
     }
     
+    /**
+     * @return static
+     */
     public static function lastThursday() : self
     {
         return self::tomorrow()->modify('previous Thursday');
     }
     
+    /**
+     * @return static
+     */
     public static function lastFriday() : self
     {
         return self::tomorrow()->modify('previous Friday');
     }
     
+    /**
+     * @return static
+     */
     public static function lastSaturday() : self
     {
         return self::tomorrow()->modify('previous Saturday');
     }
     
+    /**
+     * @return static
+     */
     public static function lastSunday() : self
     {
         return self::tomorrow()->modify('previous Sunday');
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromDateTime(DateTime $datetime) : self
     {
         return new self(DateTimeImmutable::createFromMutable($datetime));
     }
     
+    /**
+     * @return static
+     */
     public static function fromDateTimeIgnoringTimezone(DateTime $datetime) : self
     {
         return new self(new DateTimeImmutable($datetime->format('Y-m-d'), self::getUTC()));
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromDateTimeImmutable(DateTimeImmutable $datetime) : self
     {
         return new self($datetime);
     }
     
+    /**
+     * @return static
+     */
     public static function fromDateTimeImmutableIgnoringTimezone(DateTimeImmutable $datetime) : self
     {
         return new self(new DateTimeImmutable($datetime->format('Y-m-d'), self::getUTC()));
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromTimestamp(int $timestamp) : self
     {
         return new self((new DateTimeImmutable())->setTimestamp($timestamp));
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromFormat(string $value, string $format, ?DateTimeZone $sourceTimezone = null) : self
     {
         // Ensure all datetime fields are reset if not specified in the format
@@ -218,6 +286,9 @@ class Date implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromString(string $value, ?DateTimeZone $sourceTimezone = null) : self
     {
         $datetime = DateTimeImmutable::createFromFormat('!Y-m-d', $value, $sourceTimezone ?? self::getUTC());
@@ -229,6 +300,9 @@ class Date implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public static function fromValues(int $year, int $month, int $day) : self
     {
         if ($year < 1 || $year > 9999) {
@@ -297,12 +371,10 @@ class Date implements ValueObject
         return $this->value->getTimestamp();
     }
     
-    
     public function toDatetime(?DateTimeZone $timezone = null) : DateTime
     {
         return DateTime::createFromImmutable($this->value->setTimezone($timezone ?? static::getUTC()));
     }
-    
     
     public function toDatetimeImmutable(?DateTimeZone $timezone = null) : DateTimeImmutable
     {
@@ -321,6 +393,9 @@ class Date implements ValueObject
     }
     
     
+    /**
+     * @return static
+     */
     public function modify(string $modify) : self
     {
         return new self($this->value->modify($modify));
@@ -391,7 +466,6 @@ class Date implements ValueObject
     {
         return (int)$this->value->format('W');
     }
-    
     
     
     //========================================================================================================
