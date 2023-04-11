@@ -1,7 +1,7 @@
 {
     "name": "mediagone/types-common",
     "type": "library",
-    "description": "A collection of Value Objects you should (always) use instead of primitive types!",
+    "description": "A collection of generic Value Objects you should (always) use instead of primitive types!",
     "keywords": ["value objects", "ddd", "type"],
     "license": "MIT",
     "authors": [
