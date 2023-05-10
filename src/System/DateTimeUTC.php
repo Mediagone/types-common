@@ -59,7 +59,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function now(?DateTimeZone $timezone = null) : self
+    public static function now(?DateTimeZone $timezone = null)
     {
         $datetime = new DateTime('now', $timezone ?? static::getReferenceTimezone());
         $year = (int)$datetime->format('Y');
@@ -76,7 +76,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function today(?DateTimeZone $timezone = null) : self
+    public static function today(?DateTimeZone $timezone = null)
     {
         $datetime = new DateTime('today', $timezone ?? static::getReferenceTimezone());
         $year = (int)$datetime->format('Y');
@@ -90,7 +90,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function tomorrow(?DateTimeZone $timezone = null) : self
+    public static function tomorrow(?DateTimeZone $timezone = null)
     {
         $datetime = new DateTime('tomorrow', $timezone ?? static::getReferenceTimezone());
         $year = (int)$datetime->format('Y');
@@ -104,7 +104,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function yesterday(?DateTimeZone $timezone = null) : self
+    public static function yesterday(?DateTimeZone $timezone = null)
     {
         $datetime = new DateTime('yesterday', $timezone ?? static::getReferenceTimezone());
         $year = (int)$datetime->format('Y');
@@ -120,7 +120,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function mondayThisWeek(?DateTimeZone $timezone = null) : self
+    public static function mondayThisWeek(?DateTimeZone $timezone = null)
     {
         return new static(new DateTimeImmutable('Monday this week', $timezone ?? static::getReferenceTimezone()));
     }
@@ -128,7 +128,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function tuesdayThisWeek(?DateTimeZone $timezone = null) : self
+    public static function tuesdayThisWeek(?DateTimeZone $timezone = null)
     {
         return new static(new DateTimeImmutable('Tuesday this week', $timezone ?? static::getReferenceTimezone()));
     }
@@ -136,7 +136,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function wednesdayThisWeek(?DateTimeZone $timezone = null) : self
+    public static function wednesdayThisWeek(?DateTimeZone $timezone = null)
     {
         
         return new static(new DateTimeImmutable('Wednesday this week', $timezone ?? static::getReferenceTimezone()));
@@ -145,7 +145,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function thursdayThisWeek(?DateTimeZone $timezone = null) : self
+    public static function thursdayThisWeek(?DateTimeZone $timezone = null)
     {
         return new static(new DateTimeImmutable('Thursday this week', $timezone ?? static::getReferenceTimezone()));
     }
@@ -153,7 +153,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function fridayThisWeek(?DateTimeZone $timezone = null) : self
+    public static function fridayThisWeek(?DateTimeZone $timezone = null)
     {
         return new static(new DateTimeImmutable('Friday this week', $timezone ?? static::getReferenceTimezone()));
     }
@@ -161,7 +161,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function saturdayThisWeek(?DateTimeZone $timezone = null) : self
+    public static function saturdayThisWeek(?DateTimeZone $timezone = null)
     {
         return new static(new DateTimeImmutable('Saturday this week', $timezone ?? static::getReferenceTimezone()));
     }
@@ -169,7 +169,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function sundayThisWeek(?DateTimeZone $timezone = null) : self
+    public static function sundayThisWeek(?DateTimeZone $timezone = null)
     {
         return new static(new DateTimeImmutable('Sunday this week', $timezone ?? static::getReferenceTimezone()));
     }
@@ -177,7 +177,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function lastMonday(?DateTimeZone $timezone = null) : self
+    public static function lastMonday(?DateTimeZone $timezone = null)
     {
         return static::tomorrow($timezone)->modify('previous Monday');
     }
@@ -185,7 +185,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function lastTuesday(?DateTimeZone $timezone = null) : self
+    public static function lastTuesday(?DateTimeZone $timezone = null)
     {
         return static::tomorrow($timezone)->modify('previous Tuesday');
     }
@@ -193,7 +193,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function lastWednesday(?DateTimeZone $timezone = null) : self
+    public static function lastWednesday(?DateTimeZone $timezone = null)
     {
         return static::tomorrow($timezone)->modify('previous Wednesday');
     }
@@ -201,7 +201,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function lastThursday(?DateTimeZone $timezone = null) : self
+    public static function lastThursday(?DateTimeZone $timezone = null)
     {
         return static::tomorrow($timezone)->modify('previous Thursday');
     }
@@ -209,7 +209,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function lastFriday(?DateTimeZone $timezone = null) : self
+    public static function lastFriday(?DateTimeZone $timezone = null)
     {
         return static::tomorrow($timezone)->modify('previous Friday');
     }
@@ -217,7 +217,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function lastSaturday(?DateTimeZone $timezone = null) : self
+    public static function lastSaturday(?DateTimeZone $timezone = null)
     {
         return static::tomorrow($timezone)->modify('previous Saturday');
     }
@@ -225,7 +225,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function lastSunday(?DateTimeZone $timezone = null) : self
+    public static function lastSunday(?DateTimeZone $timezone = null)
     {
         return static::tomorrow($timezone)->modify('previous Sunday');
     }
@@ -235,7 +235,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function fromDateTime(DateTime $datetime) : self
+    public static function fromDateTime(DateTime $datetime)
     {
         return new static(DateTimeImmutable::createFromMutable($datetime));
     }
@@ -244,7 +244,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function fromDateTimeImmutable(DateTimeImmutable $datetime) : self
+    public static function fromDateTimeImmutable(DateTimeImmutable $datetime)
     {
         return new static($datetime);
     }
@@ -253,7 +253,7 @@ class DateTimeUTC implements ValueObject
     /**
      * @return static
      */
-    public static function fromString(string $value, ?DateTimeZone $timezone = null) : self
+    public static function fromString(string $value, ?DateTimeZone $timezone = null)
     {
         if ($timezone === null) {
             $timezone = static::getReferenceTimezone();
@@ -268,7 +268,10 @@ class DateTimeUTC implements ValueObject
     }
     
     
-    public static function fromTimestamp(int $timestamp) : self
+    /**(
+     * @return static
+     */
+    public static function fromTimestamp(int $timestamp)
     {
         $datetime = (new DateTimeImmutable('now', static::getReferenceTimezone()))->setTimestamp($timestamp);
         
@@ -276,7 +279,10 @@ class DateTimeUTC implements ValueObject
     }
     
     
-    public static function fromFormat(string $value, string $format, ?DateTimeZone $timezone = null) : self
+    /**(
+     * @return static
+     */
+    public static function fromFormat(string $value, string $format, ?DateTimeZone $timezone = null)
     {
         // Ensure all datetime fields are reset if not specified in the format
         if ($format[0] !== '!') {
@@ -292,7 +298,10 @@ class DateTimeUTC implements ValueObject
     }
     
     
-    public static function fromValues(int $year, int $month, int $day, int $hours = 0, int $minutes = 0, int $seconds = 0, ?DateTimeZone $timezone = null) : self
+    /**(
+     * @return static
+     */
+    public static function fromValues(int $year, int $month, int $day, int $hours = 0, int $minutes = 0, int $seconds = 0, ?DateTimeZone $timezone = null)
     {
         if ($year < 1 || $year > 9999) {
             throw new InvalidArgumentException('Invalid date "year" value ('.$year.'), it must be between [1-9999]');
@@ -404,14 +413,20 @@ class DateTimeUTC implements ValueObject
     }
     
     
-    public function modify(string $modify) : self
+    /**(
+     * @return static
+     */
+    public function modify(string $modify)
     {
         return new static($this->value->modify($modify));
     }
     
     //TODO: startOfDay ?
     
-    public function midnight() : self
+    /**(
+     * @return static
+     */
+    public function midnight()
     {
         return new static($this->value->setTime(23,59,59,999999));
     }
@@ -528,7 +543,10 @@ class DateTimeUTC implements ValueObject
     }
     
     
-    public function add(DateInterval $interval) : self
+    /**(
+     * @return static
+     */
+    public function add(DateInterval $interval)
     {
         return new static($this->value->add($interval));
     }
