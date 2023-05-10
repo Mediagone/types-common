@@ -69,7 +69,7 @@ class DayOfMonth implements ValueObject
     //========================================================================================================
     
     #[\ReturnTypeWillChange]
-    public function jsonSerialize()
+    public function jsonSerialize() : int
     {
         return $this->value;
     }

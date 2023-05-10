@@ -125,7 +125,7 @@ class SlugSnake implements ValueObject
     //========================================================================================================
     
     #[\ReturnTypeWillChange]
-    public function jsonSerialize()
+    public function jsonSerialize() : string
     {
         return $this->value;
     }

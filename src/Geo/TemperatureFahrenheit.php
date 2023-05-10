@@ -68,7 +68,7 @@ class TemperatureFahrenheit implements Temperature
     //========================================================================================================
     
     #[\ReturnTypeWillChange]
-    public function jsonSerialize()
+    public function jsonSerialize() : float
     {
         return $this->value;
     }

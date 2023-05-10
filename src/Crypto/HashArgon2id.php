@@ -116,7 +116,7 @@ class HashArgon2id extends Hash
     //========================================================================================================
     
     #[\ReturnTypeWillChange]
-    public function jsonSerialize()
+    public function jsonSerialize() : string
     {
         return $this->value;
     }

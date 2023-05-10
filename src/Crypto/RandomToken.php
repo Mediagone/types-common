@@ -90,9 +90,9 @@ class RandomToken implements ValueObject
     //========================================================================================================
     
     #[\ReturnTypeWillChange]
-    public function jsonSerialize()
+    public function jsonSerialize() : string
     {
-        return $this->value;
+        return (string)$this->value;
     }
     
     
