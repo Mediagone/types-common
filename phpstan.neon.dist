@@ -1,0 +1,10 @@
+includes:
+parameters:
+    level: max
+    paths:
+        - src/
+    treatPhpDocTypesAsCertain: false
+    ignoreErrors:
+        - message: '#.*#'
+          path: src/Specialized/
+    tmpDir: ../var/cache/phpstan
