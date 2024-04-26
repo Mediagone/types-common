@@ -491,6 +491,16 @@ class Date implements ValueObject
         return new self($this->value->modify('next sunday'));
     }
     
+    public function startOfMonth() : self
+    {
+        return new self($this->value->modify('first day of this month'));
+    }
+    
+    public function endOfMonth() : self
+    {
+        return new self($this->value->modify('last day of this month'));
+    }
+    
     //========================================================================================================
     // Operations methods
     //========================================================================================================

@@ -330,6 +330,32 @@ final class DateTest extends TestCase
         self::assertSame('2024-01-14', (string)$resultDate);
     }
     
+    /**
+     * @testWith ["2024-01-01"]
+     *           ["2024-01-16"]
+     *           ["2024-01-31"]
+     */
+    public function test_can_return_start_of_month(string $dateYmd) : void
+    {
+        $originalDate = Date::fromString($dateYmd);
+        $resultDate = $originalDate->startOfMonth();
+        self::assertNotSame($originalDate, $resultDate);
+        self::assertSame('2024-01-01', (string)$resultDate);
+    }
+    
+    /**
+     * @testWith ["2024-01-01"]
+     *           ["2024-01-16"]
+     *           ["2024-01-31"]
+     */
+    public function test_can_return_end_of_month(string $dateYmd) : void
+    {
+        $originalDate = Date::fromString($dateYmd);
+        $resultDate = $originalDate->endOfMonth();
+        self::assertNotSame($originalDate, $resultDate);
+        self::assertSame('2024-01-31', (string)$resultDate);
+    }
+    
     //========================================================================================================
     // Getters Tests
     //========================================================================================================
