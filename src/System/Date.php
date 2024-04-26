@@ -511,6 +511,39 @@ class Date implements ValueObject
         return new self($this->value->modify('last day of december this year'));
     }
     
+    /**
+     * Return the same day of previous month, or the last day of previous month if it has fewer days than necessary.
+     */
+    public function previousMonth() : self
+    {
+        $previousMonthDate = $this->value->modify('last month');
+        
+        // If the current day number is greater than the previous month's number of days, PHP cycles up automatically to
+        // the following month. In this case, return the last day of the previous month instead.
+        if ($this->getMonth() === (int)$previousMonthDate->format('m')) {
+            $previousMonthDate = $this->value->modify('last day of last month');
+        }
+        
+        return new self($previousMonthDate);
+    }
+    
+    /**
+     * Return the same day of next month, or the last day of next month if it has fewer days than necessary.
+     */
+    public function nextMonth() : self
+    {
+        $nextMonthDate = $this->value->modify('next month');
+        $firstDayOfNextMonthDate = $this->value->modify('last day of this month')->modify('+1 day');
+        
+        // If the current day number is greater than the next month's number of days, PHP cycles up automatically to
+        // the following month. In this case, return the last day of the next month instead.
+        if ((int)$firstDayOfNextMonthDate->format('m') !== (int)$nextMonthDate->format('m')) {
+            $nextMonthDate = $firstDayOfNextMonthDate->modify('last day of this month');
+        }
+        
+        return new self($nextMonthDate);
+    }
+    
     //========================================================================================================
     // Operations methods
     //========================================================================================================

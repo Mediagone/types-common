@@ -380,6 +380,35 @@ final class DateTest extends TestCase
         self::assertSame('2024-12-31', (string)$resultDate);
     }
     
+    /**
+     * @testWith ["2024-01-01", "2023-12-01"]
+     *           ["2024-01-02", "2023-12-02"]
+     *           ["2024-01-31", "2023-12-31"]
+     *           ["2024-03-31", "2024-02-29"]
+     *           ["2024-05-31", "2024-04-30"]
+     */
+    public function test_can_return_previous_month(string $dateYmd, string $expectedDateYmd) : void
+    {
+        $originalDate = Date::fromString($dateYmd);
+        $resultDate = $originalDate->previousMonth();
+        self::assertSame($expectedDateYmd, (string)$resultDate);
+    }
+    
+    /**
+     * @testWith ["2024-01-01", "2024-02-01"]
+     *           ["2024-01-02", "2024-02-02"]
+     *           ["2024-01-31", "2024-02-29"]
+     *           ["2023-12-31", "2024-01-31"]
+     */
+    public function test_can_return_next_month(string $dateYmd, string $expectedDateYmd) : void
+    {
+        $originalDate = Date::fromString($dateYmd);
+        $resultDate = $originalDate->nextMonth();
+        self::assertSame($expectedDateYmd, (string)$resultDate);
+    }
+    
+    
+    
     //========================================================================================================
     // Getters Tests
     //========================================================================================================
