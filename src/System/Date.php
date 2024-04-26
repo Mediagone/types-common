@@ -350,7 +350,7 @@ class Date implements ValueObject
     
     
     //========================================================================================================
-    // Methods
+    // Conversion methods
     //========================================================================================================
     
     #[\ReturnTypeWillChange]
@@ -467,6 +467,29 @@ class Date implements ValueObject
         return (int)$this->value->format('W');
     }
     
+    
+    
+    //========================================================================================================
+    // Modifier methods
+    //========================================================================================================
+    
+    public function startOfWeek() : self
+    {
+        if ($this->getDayOfWeek() === 1) {
+            return new self($this->value);
+        }
+        
+        return new self($this->value->modify('last monday'));
+    }
+    
+    public function endOfWeek() : self
+    {
+        if ($this->getDayOfWeek() === 7) {
+            return new self($this->value);
+        }
+        
+        return new self($this->value->modify('next sunday'));
+    }
     
     //========================================================================================================
     // Operations methods

@@ -301,6 +301,36 @@ final class DateTest extends TestCase
     
     
     //========================================================================================================
+    // Modifiers Tests
+    //========================================================================================================
+    
+    /**
+     * @testWith ["2024-01-08"]
+     *           ["2024-01-11"]
+     *           ["2024-01-14"]
+     */
+    public function test_can_return_start_of_week(string $dateYmd) : void
+    {
+        $originalDate = Date::fromString($dateYmd);
+        $resultDate = $originalDate->startOfWeek();
+        self::assertNotSame($originalDate, $resultDate);
+        self::assertSame('2024-01-08', (string)$resultDate);
+    }
+    
+    /**
+     * @testWith ["2024-01-08"]
+     *           ["2024-01-11"]
+     *           ["2024-01-14"]
+     */
+    public function test_can_return_end_of_week(string $dateYmd) : void
+    {
+        $originalDate = Date::fromString($dateYmd);
+        $resultDate = $originalDate->endOfWeek();
+        self::assertNotSame($originalDate, $resultDate);
+        self::assertSame('2024-01-14', (string)$resultDate);
+    }
+    
+    //========================================================================================================
     // Getters Tests
     //========================================================================================================
     
